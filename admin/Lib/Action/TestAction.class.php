@@ -27,5 +27,18 @@ class TestAction extends Action {
             $ath->data($dt)->add();
         }
     }
+    public function deleteMOKUAIWENZI(){
+        $md=M('md');
+        $mdls=$md->select();
+
+        foreach($mdls as $mdv){
+            $mdid=$mdv['mdid'];$mdnm=$mdv['mdnm'];
+            if( strstr($mdnm,'模块')){
+                $tmp=explode('模块',$mdnm);
+                $dt=array('mdnm'=>$tmp[0]);
+                $md->where('mdid='.$mdid)->setField($dt);
+            }
+        }
+    }
 
 }

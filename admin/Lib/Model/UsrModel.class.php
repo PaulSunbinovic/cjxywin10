@@ -51,7 +51,7 @@ class UsrModel{
 			if($usro['usrpw']==md5($usrpw)){
 				$rslt=1;
 				session('usridss',$usro['usrid']);
-				if($rmb=='y'){cookie('usridck',$usro['usrid']);}
+				if($rmb=='y'){cookie('usridck',$usro['usrid'],365*24*3600);}
 				$msg='登录成功';
 			}else{
 				$rslt=0;
@@ -115,6 +115,31 @@ class UsrModel{
 		return createarrok('ok',$usrls,'',$info);
 		
 	}
+
+	//公版
+	public function getmlsbysttid($sttid){
+		$info=collectinfo(__METHOD__,'$sttid',array($sttid));
+		if(isset($sttid)===false){return createarrerr('error_code','sttid 不能为空',$info);}//防止NULL
+
+		$usr=M('usr');
+		$usrls=$usr->join('tb_stt ON f_usr_sttid=sttid')->where('f_usr_sttid='.$sttid)->select();
+
+		return createarrok('ok',$usrls,'',$info);
+	}
+	
+	//
+	public function deletebysttid($sttid){
+		$info=collectinfo(__METHOD__,'$sttid',array($sttid));
+		if(isset($sttid)===false){return createarrerr('error_code','sttid 不能为空',$info);}//防止NULL
+		
+		$arr_usrls=$this->getmlsbysttid($sttid);$usrls=$arr_usrls['data'];
+		foreach($usrls as $usrv){
+			$this->delete($usrv['usrid']);
+		}
+
+		return createarrok('ok',$data,'',$info);
+	}
+
 
 	//############test
 	public function delete($usrid){

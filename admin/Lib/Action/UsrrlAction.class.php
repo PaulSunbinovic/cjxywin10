@@ -7,10 +7,10 @@ class UsrrlAction extends Action {
 	//聚合
     private $all=array(
     	'mdmk'=>'Usrrl',//NB
-  		'ttl'=>'用户——团队——角色',
+  		'ttl'=>'用户——部门——职务',
   		'jn'=>array('tb_usr ON f_usrrl_usrid=usrid','tb_rl ON f_usrrl_rlid=rlid','tb_grp ON f_rl_grpid=grpid'),//NB
       //自己的全部+f的显示的东西
-  		'para'=>array('usrrlid'=>'ID','f_usrrl_usrid'=>'用户','usrnn'=>'用户真名','grpnm'=>'团队名','f_usrrl_rlid'=>'角色','rlnm'=>'角色名','f_rl_grpid'=>'团队'),//NB
+  		'para'=>array('usrrlid'=>'ID','f_usrrl_usrid'=>'用户','usrnn'=>'用户真名','grpnm'=>'部门名','f_usrrl_rlid'=>'职务','rlnm'=>'职务名','f_rl_grpid'=>'部门'),//NB
   		//抛去不是zabojin的属性针对para
       'notself'=>array('usrnn','rlnm','f_rl_grpid','grpnm'),
        ##########modify 添加修改中不需要展示和理会的属性 针对para
@@ -19,7 +19,7 @@ class UsrrlAction extends Action {
       'allowempty'=>array(),
 
       'hide_fld'=>array('usrrlid','f_usrrl_usrid','f_usrrl_rlid','f_rl_grpid'),//NB
-      'hide_cdt'=>array('usrrlid','usrnn','rlnm','f_rl_grpid','grpnm'),//NB
+      'hide_cdt'=>array('usrrlid','usrnn','rlnm','grpnm'),//NB
   		
     //   'spccdtls'=>array('spccdt_0'=>array('aaid<>0','aaID不为0【废话只是测试】')),
   		// 'odrls'=>array('aanm'),
@@ -82,6 +82,10 @@ class UsrrlAction extends Action {
       }
       $this->assign('f_usrrl_rlid',$rllsall);
 
+      $arr_grpls=$grp->getmlsbyodr('grpodr ASC');$grpls=$arr_grpls['data'];
+      $arr=$tree->unlimitedForListSLCT($grpls,0,'grpid','grpnm','grppid','grpodr');
+      $this->assign('f_rl_grpid',$arr);
+
       //dingshio
       $this->display('Cmn:query');
   
@@ -130,6 +134,7 @@ class UsrrlAction extends Action {
         
       }
       $this->assign('f_usrrl_rlid',$rllsall);
+
 
       //dingshio
 		  $this->display('Cmn:update');

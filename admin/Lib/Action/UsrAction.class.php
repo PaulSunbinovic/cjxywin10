@@ -6,12 +6,12 @@ class UsrAction extends Action {
     private $all=array(
         'mdmk'=>'Usr',
         'ttl'=>'用户',
-        'jn'=>array(),
-        'para'=>array('usrid'=>'usrID','usrmk'=>'是否管理员','usrnm'=>'用户名','usrpw'=>'密码','usrnn'=>'真名','usrpt'=>'头像','usraddtm'=>'添加时间','usrmdftm'=>'修改时间','usrcp'=>'手机号','usrml'=>'邮箱','usrps'=>'是否通过','usrvw'=>'是否查看过','usrodr'=>'顺序'),
+        'jn'=>array('tb_stt ON f_usr_sttid=sttid'),
+        'para'=>array('usrid'=>'usrID','usrmk'=>'是否管理员','usrnm'=>'用户名','usrpw'=>'密码','usrnn'=>'真名','f_usr_sttid'=>'站点','sttnm'=>'站点名称','usrpt'=>'头像','usraddtm'=>'添加时间','usrmdftm'=>'修改时间','usrcp'=>'手机号','usrml'=>'邮箱','usrps'=>'是否通过','usrvw'=>'是否查看过','usrodr'=>'顺序'),
         //抛去不是zabojin的属性
-        'notself'=>array(),
-        'hide_fld'=>array('usrid','usrpw'),
-        'hide_cdt'=>array('usrid','usrpw','usrpt','usrodr'),
+        'notself'=>array('sttnm'),
+        'hide_fld'=>array('usrid','usrpw','f_usr_sttid'),
+        'hide_cdt'=>array('usrid','usrpw','sttnm','usrpt','usrodr'),
 
         //   'spccdtls'=>array('spccdt_0'=>array('aaid<>0','aaID不为0【废话只是测试】')),
         // 'odrls'=>array('aanm'),
@@ -23,16 +23,16 @@ class UsrAction extends Action {
         'spccdt_dflt'=>array(),
         'odr_dflt'=>array('usrodr'=>'ASC'),
 
-        'fld_dflt'=>array('usrid','usrmk','usrnm','usrnn','usrpt','usraddtm','usrmdftm','usrcp','usrml','usrps','usrvw','usrodr'),
+        'fld_dflt'=>array('usrid','usrmk','usrnm','usrnn','f_usr_sttid','sttnm','usrpt','usraddtm','usrmdftm','usrcp','usrml','usrps','usrvw','usrodr'),
         'cdt_dflt'=>array(),
         
         'lmt_dflt'=>10,
         
         'defaultls'=>1,//默认枚举
         ##########view
-        'no_view'=>array('usrid','usrpw'),
+        'no_view'=>array('usrid','f_usr_sttid','usrpw'),
         ##########modify//不用显示不用考虑的属性
-        'no_update'=>array('usrid','usrpw','usraddtm','usrmdftm'),
+        'no_update'=>array('usrid','usrpw','sttnm','usraddtm','usrmdftm'),
         #########删除提醒
         'deleteconfirm'=>'删除用户会导致usrrl相应的数据删除，确定？',
         #####转义

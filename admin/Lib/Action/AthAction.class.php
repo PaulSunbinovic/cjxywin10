@@ -10,7 +10,7 @@ class AthAction extends Action {
   		'ttl'=>'权限',
   		'jn'=>array('tb_rl ON f_ath_rlid=rlid','tb_grp ON f_rl_grpid=grpid','tb_md ON f_ath_mdid=mdid'),//NB
       //自己的全部+f的显示的东西
-  		'para'=>array('athid'=>'ID','grpnm'=>'团队名','f_ath_rlid'=>'角色','rlnm'=>'角色名','f_rl_grpid'=>'角色名','f_ath_mdid'=>'模版','mdnm'=>'模板名','atha'=>'增加','athd'=>'删除','athm'=>'修改','athv'=>'查看','aths'=>'设置'),//NB
+  		'para'=>array('athid'=>'ID','grpnm'=>'部门名','f_ath_rlid'=>'职务','rlnm'=>'职务名','f_rl_grpid'=>'部门名','f_ath_mdid'=>'模版','mdnm'=>'模板名','atha'=>'增加','athd'=>'删除','athm'=>'修改','athv'=>'查看','aths'=>'设置'),//NB
   		//抛去不是zabojin的属性针对para
       'notself'=>array('rlnm','mdnm','f_rl_grpid','grpnm'),
        ##########modify 添加修改中不需要展示和理会的属性 针对para

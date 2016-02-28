@@ -10,13 +10,13 @@ class RlAction extends Action {
   		'ttl'=>'角色',
   		'jn'=>array('tb_grp ON f_rl_grpid=grpid'),//NB
       //自己的全部+f的显示的东西
-  		'para'=>array('rlid'=>'rlID','rlnm'=>'角色名称','f_rl_grpid'=>'团队','grpnm'=>'团队名称'),//NB
+  		'para'=>array('rlid'=>'rlID','rlnm'=>'职务名称','f_rl_grpid'=>'部门','grpnm'=>'部门名称'),//NB
   		//抛去不是zabojin的属性针对para
       'notself'=>array('grpnm'),
        ##########modify 添加修改中不需要展示和理会的属性 针对para
       'no_update'=>array('rlid','grpnm'),
       #####update的时候允许为空的值 针对zabojin刨掉不然显示的update字段后
-      'allowempty'=>array(),
+      'allowempty'=>array(''),
 
       'hide_fld'=>array('rlid','f_rl_grpid'),//NB
       'hide_cdt'=>array('rlid','grpnm'),//NB
@@ -72,11 +72,17 @@ class RlAction extends Action {
 		  $this->display('Cmn:view');
     }
    
-   	//公版
+   	//
    	public function update(){
    		header("Content-Type:text/html; charset=utf-8");
-    	$pb=D('PB');
+    	$pb=D('PB');$tree=D('Tree');$grp=D('Grp');
     	$pb->update($this->all);
+      #dingzhis
+      #手动枚举并覆盖
+      $arr_grpls=$grp->getmlsbyodr('grpodr ASC');$grpls=$arr_grpls['data'];
+      $arr=$tree->unlimitedForListSLCT($grpls,0,'grpid','grpnm','grppid','grpodr');
+      $this->assign('f_rl_grpid',$arr);
+      #dingzhio
 		  $this->display('Cmn:update');
    	}
 
@@ -89,7 +95,7 @@ class RlAction extends Action {
       //dingzhis
       //添加了角色必然会导致ath的增加
       $rlid=$_GET['rlid'];
-      $ath->addbyrlid($rlid)
+      $ath->addbyrlid($rlid);
       //dingzhio
       $this->ajaxReturn($data,'json');
     }

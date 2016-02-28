@@ -40,5 +40,49 @@ class TestAction extends Action {
             }
         }
     }
+    public function tilianmj(){
+        $mj2013=M('2013_mj');$mj2014=M('2014_mj');$mj2015=M('2015_mj');
+        $mj=M('mj');$mjmap=M('mjmap');
+        #################
+        $mjls=$mj2013->select();
+        foreach($mjls as $mjv){
+            //判断mj数据库是否有这个
+            $count=$mj->where("mjnm='".$mjv['mjnm']."'")->count();
+            if($count==0){
+                $dt=array('mjnm'=>$mjv['mjnm']);
+                $mj->data($dt)->add();
+            }
+            $mjo=$mj->where("mjnm='".$mjv['mjnm']."'")->find();
+            $dt=array('year'=>'2013','oldmjid'=>$mjv['mjid'],'oldmjnm'=>$mjv['mjnm'],'nwmjid'=>$mjo['mjid'],'nwmjnm'=>$mjo['mjnm']);
+            $mjmap->data($dt)->add();
+        }
+        #################
+        $mjls=$mj2014->select();
+        foreach($mjls as $mjv){
+            //判断mj数据库是否有这个
+            $count=$mj->where("mjnm='".$mjv['mjnm']."'")->count();
+            if($count==0){
+                $dt=array('mjnm'=>$mjv['mjnm']);
+                $mj->data($dt)->add();
+            }
+            $mjo=$mj->where("mjnm='".$mjv['mjnm']."'")->find();
+            $dt=array('year'=>'2014','oldmjid'=>$mjv['mjid'],'oldmjnm'=>$mjv['mjnm'],'nwmjid'=>$mjo['mjid'],'nwmjnm'=>$mjo['mjnm']);
+            $mjmap->data($dt)->add();
+        }
+        #################
+        $mjls=$mj2015->select();
+        foreach($mjls as $mjv){
+            //判断mj数据库是否有这个
+            $count=$mj->where("mjnm='".$mjv['mjnm']."'")->count();
+            if($count==0){
+                $dt=array('mjnm'=>$mjv['mjnm']);
+                $mj->data($dt)->add();
+            }
+            $mjo=$mj->where("mjnm='".$mjv['mjnm']."'")->find();
+            $dt=array('year'=>'2015','oldmjid'=>$mjv['mjid'],'oldmjnm'=>$mjv['mjnm'],'nwmjid'=>$mjo['mjid'],'nwmjnm'=>$mjo['mjnm']);
+            $mjmap->data($dt)->add();
+        }
+
+    }
 
 }

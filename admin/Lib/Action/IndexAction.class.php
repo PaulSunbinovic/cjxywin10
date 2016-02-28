@@ -20,7 +20,7 @@ class IndexAction extends Action {
 				//处理左边列表
 				$left->setleft($usross['usrid']);
 				//处理右边
-				$this->assign('ttl','主体');
+				$this->assign('ttl','欢迎使用');
 				$this->display('manager');
 			}else{
 				$this->display('notpass');

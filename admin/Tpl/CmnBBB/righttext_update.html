@@ -1,8 +1,11 @@
 <script>
 	var doupdate='__URL__/doupdate';
+	var dolinkage='__URL__/dolinkage';
 	var obj=new Object();
 	var addormdf="{$id}";
 	obj["{$lowmdmk}"+"id"]="{$id}";
+	obj["f_"+"{$lowmdmk}"+"_"+"{$splitmark}"+'id']="{$gid}";
+	
 </script>
 <!--table部分-->
 <div class='col-md-12' style='padding-top: 20px'>
@@ -12,7 +15,6 @@
 			<?php foreach($para as $k=>$v){
 					if(!in_array($k, $no_update)){
 			 ?>
-			<?php if($k!='atcctt'&&$k!='atccv'&&$k!='atcsmr'){ ?>
 			<tr><td>{$v}</td><td>
 			<?php if(strstr($k, '_')){ ?>
 			<select id='{$k}'>
@@ -33,71 +35,10 @@
 			<?php } ?>
 			<script>var k="{$k}";var v="{$moforjs[$k]}";if(k.indexOf('_')!=-1&&v==''){$('#'+k).val('0');}else{$('#'+k).val(v);}</script>
 			</td></tr>
-			<?php } ?>
 			<?php }
 			} ?>
 		</tbody>
 	</table>
-	<?php if($mo['atcath']==''){ ?><script>$('#atcath').val("{$usross['usrnn']}");</script><?php } ?>
-	<!-- pt start -->
-	封面：<br>
-	<link rel="stylesheet" type="text/css" href="__PUBLIC__/etc/huploadify/html5uploader.css"/>
-	<script type="text/javascript" src="__PUBLIC__/etc/huploadify/jquery.html5uploader.js"></script>
-	<script>var dogivetail='__APP__/Hupldf/dogivetail'</script>
-		<script type="text/javascript">
-	$(function(){
-		$('#upload').html5uploader({
-			fileTypeExts:'image/jpeg,image/png',
-			auto:true,
-			multi:false,
-			removeTimeout:0,
-			url:'__APP__/Hupldf/upload/folder/atccv',//
-			onUploadStart:function(){
-				//alert('开始上传');
-				var timestamp = (new Date()).valueOf();
-			},
-			onInit:function(){
-				//alert('初始化');
-			},
-			onUploadComplete:function(file){
-				//alert('上传完成');
-				$.post(
-					'__APP__/Hupldf/showphoto',
-					{},
-					function(data){
-						$('#imgg').attr('src',data.myfl);
-						$('input[name=pt]').val(data.myfl);
-					},
-					'json'
-				);
-			}
-		});
-	});
-	</script>
-	<div><img <?php if($mo['atccv']){ ?>src="{$mo['atccv']}" <?php }else{ ?>src='/{$project}/Public/img/atccv/default.jpg'<?php } ?> class='thumbnail' style='max-width: 100%' id='imgg' /><input type='hidden' id='atccv' name='pt' value="{$mo['atccv']}"/></div>
-	<div id="upload"></div>
-    <!-- pt over -->
-
-    <!--摘要-->
-    摘要<br>
-    <div><textarea id='atcsmr' style="width: 100%" placeholder='摘要允许为空'>{$mo['atcsmr']}</textarea></div>
-
-	<script type="text/javascript">var project="{$project}";</script>
-	<link rel="stylesheet" href="__PUBLIC__/etc/ueditor/themes/default/ueditor.css"/>
-	<script type="text/javascript" src="__PUBLIC__/etc/ueditor/editor_config.js"></script>
-	<script type="text/javascript" src="__PUBLIC__/etc/ueditor/editor_all.js"></script>
-	<div>
-	<p>文章内容</p>
-	  <div id="myEditor">
-		<script type="text/javascript">
-			var editor = new baidu.editor.ui.Editor({
-			    initialContent: '{$mo.atcctt}'
-			});
-			editor.render("myEditor");
-		</script>
-		</div>
-	</div>
-	<textarea id='atcctt' style='display:none'></textarea>
 	<a class='btn btn-primary' id='update'><?php if($id==0){ ?>添加<?php }else{ ?>修改<?php } ?></a>
 </div>
 
@@ -119,7 +60,7 @@ origindata["{$k}"]="{$moforjs[$k]}";
 } 
 ?>
 
-//的属性里面不用管的，也不用显示的
+//不用管的，也不用显示的
 var no_update=new Array();
 <?php 
 foreach($no_update as $nuv){ 
@@ -150,9 +91,7 @@ transmeank.push("{$tmvk}");
 //#########
 $(function(){
 	$('#update').click(function(){
-		//dingzhis
-		$('#atcctt').val(editor.getContent());
-		//dingzhio
+
 		//首先把相关的参数数据聚集起来，把自身更新需要的参数以及变动的数据进行传输
 		//由于第一个往往是id所以，就不去考虑了
 		//先判断是否为空
@@ -213,4 +152,46 @@ $(function(){
         });
 	})
 })
+</script>
+
+<script>
+
+$(function(){
+  //记录
+  var ipf=new Array();
+  <?php foreach($impactfactor as $ifv){ ?>
+    ipf.push("{$ifv}");
+  <?php } ?>
+  <?php foreach($impactfactor as $ifv){ ?>
+    $('#'+"{$ifv}").change(function(){
+      var obj=new Object();
+      obj['trigger']="{$ifv}";
+      for(var i=0;i<ipf.length;i++){
+        obj[ipf[i]]=$('#'+ipf[i]).val();
+      }
+      $.ajax({
+          'type': 'GET',
+          'url':dolinkage,
+          'async':false,  
+          'contentType': 'application/json',
+          'data': obj,
+          'dataType': 'json',
+          'success': function(data) {
+            for(var i=0;i<data.length;i++){
+              var aim=data[i]['aim'];
+              var str="<option value='0'>无</option>";
+              for(var j=0;j<data[i]['ls'].length;j++){
+                str=str+"<option value='"+data[i]['ls'][j][data[i]['prex']+'id']+"'>"+data[i]['ls'][j][data[i]['prex']+'nm']+"</option>"
+              }
+              $('#'+aim).html(str);
+            }
+          },
+          'error':function() {
+            console.log("error");
+          }
+      });
+    })
+  <?php } ?>
+})
+
 </script>

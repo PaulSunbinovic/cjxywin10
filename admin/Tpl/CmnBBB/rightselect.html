@@ -2,6 +2,7 @@
 <script>
   var dosearch='__APP__/NB/dosearch';
   var obj = new Object();
+  var dolinkage='__URL__/dolinkage';
 </script>
 
 <div class='col-md-12' style='margin-top: 20px'>
@@ -181,4 +182,46 @@
     })
     
   })
+</script>
+
+<script>
+
+$(function(){
+  //记录
+  var ipf=new Array();
+  <?php foreach($impactfactor as $ifv){ ?>
+    ipf.push("{$ifv}");
+  <?php } ?>
+  <?php foreach($impactfactor as $ifv){ ?>
+    $('#'+"{$ifv}"+'_nb_cdt').change(function(){
+      var obj=new Object();
+      obj['trigger']="{$ifv}";
+      for(var i=0;i<ipf.length;i++){
+        obj[ipf[i]]=$('#'+ipf[i]+'_nb_cdt').val();
+      }
+      $.ajax({
+          'type': 'GET',
+          'url':dolinkage,
+          'async':false,  
+          'contentType': 'application/json',
+          'data': obj,
+          'dataType': 'json',
+          'success': function(data) {
+            for(var i=0;i<data.length;i++){
+              var aim=data[i]['aim'];
+              var str="<option value=''>无</option>";
+              for(var j=0;j<data[i]['ls'].length;j++){
+                str=str+"<option value='"+data[i]['ls'][j][data[i]['prex']+'id']+"'>"+data[i]['ls'][j][data[i]['prex']+'nm']+"</option>"
+              }
+              $('#'+aim+'_nb_cdt').html(str);
+            }
+          },
+          'error':function() {
+            console.log("error");
+          }
+      });
+    })
+  <?php } ?>
+})
+
 </script>

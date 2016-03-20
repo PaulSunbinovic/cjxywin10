@@ -1,0 +1,68 @@
+<div class='col-md-12 nopadding'>
+	
+
+	<div class='col-md-4' style='background-color: #efefef;height:290px'>
+		<div style='height:50px;line-height:50px;border-bottom:1px #ccc solid;font-size: 18px;color:#555'><i class='glyphicon glyphicon-file'></i> 通知公告&nbsp;|&nbsp;<a style='color:#aaa;font-size:14px;' href='__APP__/Atc/query/atctype/1'>更多</a></div>
+		<volist name='atcls_anc' id='atcancv'>
+			<div style='height:30px;line-height: 30px;overflow: hidden;'><a href="__APP__/Atc/view/atcid/{$atcancv['atcid']}/atctype/1" title="{$atcancv['atctpc']}" <?php if($atcancv['atctp']==1){ ?>style='color:#d45d42'<?php }else{ ?>style='color:#555'<?php } ?>>{$atcancv['tm']}&nbsp;|&nbsp;{$atcancv['bdnm']}&nbsp;|&nbsp;{$atcancv['atctpc']}</a></div>
+		</volist>
+	</div>
+
+	<div class='col-md-4' style='background-color: #efefef;height:290px'>
+		<div style='height:50px;line-height:50px;border-bottom:1px #ccc solid;font-size: 18px;color:#555'><i class='glyphicon glyphicon-equalizer'></i> 院校动态&nbsp;|&nbsp;<a style='color:#aaa;font-size:14px;' href='__APP__/Atc/query/atctype/2'>更多</a></div>
+		<volist name='atcls_dnmc' id='atcdnmcv'>
+			<div style='height:30px;line-height: 30px;overflow: hidden;'><a href="__APP__/Atc/view/atcid/{$atcdnmcv['atcid']}/atctype/2" title="{$atcdnmcv['atctpc']}" <?php if($atcdnmcv['atctp']==1){ ?>style='color:#d45d42'<?php }else{ ?>style='color:#555'<?php } ?>>{$atcdnmcv['tm']}&nbsp;|&nbsp;{$atcdnmcv['bdnm']}&nbsp;|&nbsp;{$atcdnmcv['atctpc']}</a></div>
+		</volist>
+	</div>
+
+	<div class='col-md-4' style='background-color: #efefef;height:290px'>
+		<div style='height:50px;line-height:50px;border-bottom:1px #ccc solid;font-size: 18px;color:#555'><i class='glyphicon glyphicon-book'></i> 函授夜大&nbsp;|&nbsp;<a style='color:#aaa;font-size:14px;' href='__APP__/Atc/query/bdid/15'>更多</a></div>
+		<volist name='atcls_hsyd' id='atcv'>
+			<div style='height:30px;line-height: 30px;overflow: hidden;'><a href="__APP__/Atc/view/atcid/{$atcv['atcid']}" title="{$atcv['atctpc']}" <?php if($atcv['atctp']==1){ ?>style='color:#d45d42'<?php }else{ ?>style='color:#555'<?php } ?>>{$atcv['tm']}&nbsp;|&nbsp;{$atcv['atctpc']}</a></div>
+		</volist>
+	</div>
+
+	<div class='col-md-4' style='height:290px'>
+		<div style='height:50px;line-height:50px;border-bottom:1px #ccc solid;font-size: 18px;color:#555'><i class='glyphicon glyphicon-th-large'></i> 继续教育&nbsp;|&nbsp;<a style='color:#aaa;font-size:14px;' href='__APP__/Atc/query/bdid/16'>更多</a></div>
+		<volist name='atcls_jxjy' id='atcv'>
+			<div style='height:30px;line-height: 30px;overflow: hidden;'><a href="__APP__/Atc/view/atcid/{$atcv['atcid']}" title="{$atcv['atctpc']}" <?php if($atcv['atctp']==1){ ?>style='color:#d45d42'<?php }else{ ?>style='color:#555'<?php } ?>>{$atcv['tm']}&nbsp;|&nbsp;{$atcv['atctpc']}</a></div>
+		</volist>
+	</div>
+
+	<div class='col-md-4' style='height:290px'>
+		<div style='height:50px;line-height:50px;border-bottom:1px #ccc solid;font-size: 18px;color:#555'><i class='glyphicon glyphicon-tag'></i> 自考助学&nbsp;|&nbsp;<a style='color:#aaa;font-size:14px;' href='__APP__/Atc/query/bdid/17'>更多</a></div>
+		<volist name='atcls_zkzx' id='atcv'>
+			<div style='height:30px;line-height: 30px;overflow: hidden;'><a href="__APP__/Atc/view/atcid/{$atcv['atcid']}" title="{$atcv['atctpc']}" <?php if($atcv['atctp']==1){ ?>style='color:#d45d42'<?php }else{ ?>style='color:#555'<?php } ?>>{$atcv['tm']}&nbsp;|&nbsp;{$atcv['atctpc']}</a></div>
+		</volist>
+	</div>
+
+	<div class='col-md-4' style='height:290px'>
+		<div style='height:50px;line-height:50px;border-bottom:1px #ccc solid;font-size: 18px;color:#555'><i class='glyphicon glyphicon-volume-up'></i> 党群活动&nbsp;|&nbsp;<a style='color:#aaa;font-size:14px;' href='__APP__/Atc/query/bdid/18'>更多</a></div>
+		<volist name='atcls_dqhd' id='atcv'>
+			<div style='height:30px;line-height: 30px;overflow: hidden;'><a href="__APP__/Atc/view/atcid/{$atcv['atcid']}" title="{$atcv['atctpc']}" <?php if($atcv['atctp']==1){ ?>style='color:#d45d42'<?php }else{ ?>style='color:#555'<?php } ?>>{$atcv['tm']}&nbsp;|&nbsp;{$atcv['atctpc']}</a></div>
+		</volist>
+	</div>
+
+	<div class='col-md-4' style='background-color: #efefef;height:290px'>
+		<div style='height:50px;line-height:50px;border-bottom:1px #ccc solid;font-size: 18px;color:#555'><i class='glyphicon glyphicon-film'></i> 教工之窗&nbsp;|&nbsp;<a style='color:#aaa;font-size:14px;' href='__APP__/Atc/query/bdid/19'>更多</a></div>
+		<volist name='atcls_jgzc' id='atcv'>
+			<div style='height:30px;line-height: 30px;overflow: hidden;'><a href="__APP__/Atc/view/atcid/{$atcv['atcid']}" title="{$atcv['atctpc']}" <?php if($atcv['atctp']==1){ ?>style='color:#d45d42'<?php }else{ ?>style='color:#555'<?php } ?>>{$atcv['tm']}&nbsp;|&nbsp;{$atcv['atctpc']}</a></div>
+		</volist>
+	</div>
+
+	<div class='col-md-4' style='background-color: #efefef;height:290px'>
+		<div style='height:50px;line-height:50px;border-bottom:1px #ccc solid;font-size: 18px;color:#555'><i class='glyphicon glyphicon-education'></i> 学生风采&nbsp;|&nbsp;<a style='color:#aaa;font-size:14px;' href='__APP__/Atc/query/bdid/20'>更多</a></div>
+		<volist name='atcls_xsfc' id='atcv'>
+			<div style='height:30px;line-height: 30px;overflow: hidden;'><a href="__APP__/Atc/view/atcid/{$atcv['atcid']}" title="{$atcv['atctpc']}" <?php if($atcv['atctp']==1){ ?>style='color:#d45d42'<?php }else{ ?>style='color:#555'<?php } ?>>{$atcv['tm']}&nbsp;|&nbsp;{$atcv['atctpc']}</a></div>
+		</volist>
+	</div>
+
+	<div class='col-md-4' style='background-color: #efefef;height:290px'>
+		<div style='height:50px;line-height:50px;border-bottom:1px #ccc solid;font-size: 18px;color:#555'><i class='glyphicon glyphicon-bookmark'></i> 资讯热点&nbsp;|&nbsp;<a style='color:#aaa;font-size:14px;' href='__APP__/Atc/query/bdid/21'>更多</a></div>
+		<volist name='atcls_zxrd' id='atcv'>
+			<div style='height:30px;line-height: 30px;overflow: hidden;'><a href="__APP__/Atc/view/atcid/{$atcv['atcid']}" title="{$atcv['atctpc']}" <?php if($atcv['atctp']==1){ ?>style='color:#d45d42'<?php }else{ ?>style='color:#555'<?php } ?>>{$atcv['tm']}&nbsp;|&nbsp;{$atcv['atctpc']}</a></div>
+		</volist>
+	</div>
+
+	
+</div>

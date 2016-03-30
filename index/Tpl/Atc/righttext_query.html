@@ -1,0 +1,26 @@
+<script>
+	var dodelete='__URL__/dodelete';
+</script>
+<!--table部分-->
+<div class='container' style="background-color: #fff;padding-top: 80px">
+
+	<volist name='atcls' id='atcv'>
+	<div style="height:40px;line-height: 40px;font-size: 15px;overflow: hidden;border-bottom:1px solid #efefef" class='col-md-12'>
+	<?php if($atctype=='tzgg'){ ?>
+	<a href="__URL__/view/atcid/{$atcv['atcid']}/atctype/1" style='color:#666'>{$atcv['tm']}&nbsp;&nbsp;|&nbsp;&nbsp;{$atcv['bdnm']}&nbsp;&nbsp;|&nbsp;&nbsp;{$atcv['atctpc']}</a>
+	<?php }else if($atctype=='yxdt'){ ?>
+	<a href="__URL__/view/atcid/{$atcv['atcid']}/atctype/2" style='color:#666'>{$atcv['tm']}&nbsp;&nbsp;|&nbsp;&nbsp;{$atcv['bdnm']}&nbsp;&nbsp;|&nbsp;&nbsp;{$atcv['atctpc']}</a>
+	<?php }else{ ?>
+	<a href="__URL__/view/atcid/{$atcv['atcid']}/bdid/{$atcv['f_atc_bdid']}" style='color:#666'>{$atcv['tm']}&nbsp;&nbsp;|&nbsp;&nbsp;{$atcv['atctpc']}</a>
+	<?php } ?>
+	</div>
+	</volist>
+	<div class='clearfix'></div>
+	<br>
+	<!--结束-->
+	<div class='col-md-12'>{$page}</div>
+	<br><br><br>
+</div>
+
+
+

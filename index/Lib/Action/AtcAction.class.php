@@ -77,4 +77,64 @@ class AtcAction extends Action {
       	$this->assign('title',C('title'));
 	  	$this->display('view');
     }
+
+    public function query(){
+    	header("Content-Type:text/html; charset=utf-8");
+    	//dingzhis
+      	$environment=D('Environment');$atc=D('Atc');$tree=D('Tree');$bd=D('Bd');
+
+      	$lmt=10;
+
+      	$atctype=$_GET['atctype'];
+      	if($atctype==1){
+      		$cdt='atcanc=1';
+      		$atctype='tzgg';
+      	}else if($atctype==2){
+      		$cdt='atcdnmc=1';
+      		$atctype='yxdt';
+      	}else{
+      		$bdid=$_GET['bdid'];
+      		$cdt='f_atc_bdid='.$bdid;
+      		switch ($bdid) {
+      			case '15':
+      				$atctype='hsyd';
+      				break;
+      			
+      			case '16':
+      				$atctype='jxjy';
+      				break;
+
+      			case '17':
+      				$atctype='zkzx';
+      				break;
+
+      			case '18':
+      				$atctype='dqhd';
+      				break;
+      			
+      			case '19':
+      				$atctype='jgzc';
+      				break;
+
+      			case '20':
+      				$atctype='xsfc';
+      				break;
+
+      			case '21':
+      				$atctype='zxrd';
+      				break;	
+      		}
+      	}
+      	$this->assign('atctype',$atctype);
+
+      	$arr_atcls=$atc->getmlsbyquery($cdt,$lmt);$atcls=$arr_atcls['data'];
+      	//改变时间格式
+      	$this->assign('atcls',$atcls);
+
+      	
+
+      	//dingzhio
+      	$this->assign('title',C('title'));
+	  	$this->display('query');
+    }
 }

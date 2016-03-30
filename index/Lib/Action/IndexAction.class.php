@@ -5,6 +5,10 @@ class IndexAction extends Action {
     	header("Content-Type:text/html; charset=utf-8");
     	$atc=D('Atc');
 
+        //焦点图
+        $arr_atclsfocus=$atc->getmlsbyfocus();$atclsfocus=$arr_atclsfocus['data'];
+        $this->assign('atclsfocus',$atclsfocus);
+
     	//寻找文章
     	//寻找announce
     	$arr=$atc->getmls(1,1,'');

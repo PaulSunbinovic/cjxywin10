@@ -53,7 +53,7 @@ class BbbAction extends Action {
       'dfltvalue'=>array(),
       ####这里新建对照表 也就是联动机制，谁被谁影响，用户select效果极佳
       ###example
-      'linkage'=>array('f_bbb_cccid'=>array('f_bbb_grdid'=>2)),
+      'linkage'=>array('f_bbb_cccid'=>array('f_bbb_grdid'=>2)),//如果ccc的变换需要转换成2015_ccc 就是2  否则如果是1 非2情况下联动没有值，不允许下拉，3联动不造成下拉有无
       ########这里是谁影响谁，用在AJAX联动 效果极佳
       'impactfactor'=>array('f_bbb_grdid'),
       

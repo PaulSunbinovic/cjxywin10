@@ -191,26 +191,40 @@ $(function(){
 				}
 			}
 		}
-		
-
-		$.ajax({
-            'type': 'GET',
-            'url':doupdate,
-            'async':false,  
-            'contentType': 'application/json',
-            'data': obj,
-            'dataType': 'json',
-            'success': function(data) {
-            	var str='';
+		$.post(
+			doupdate,
+			obj,
+			function(data){
+				
+				var str='';
             	if(data['pattern']=='0'){str='添加';}else{str='修改';}
             	alert(str+'成功！点击返回');
             	window.location.href=document.referrer;
                 console.log("success");
-            },
-            'error':function() {
-                console.log("error");
-            }
-        });
+			
+			
+			},
+			'json'
+		);
+
+		// $.ajax({
+  //           'type': 'POST',
+  //           'url':doupdate,
+  //           'async':false,  
+  //           'contentType': 'application/json',
+  //           'data':obj,
+  //           'dataType': 'json',
+  //           'success': function(data) {
+  //           	var str='';
+  //           	if(data['pattern']=='0'){str='添加';}else{str='修改';}
+  //           	alert(str+'成功！点击返回');
+  //           	window.location.href=document.referrer;
+  //               console.log("success");
+  //           },
+  //           'error':function() {
+  //               console.log("error");
+  //           }
+  //       });
 	})
 })
 </script>

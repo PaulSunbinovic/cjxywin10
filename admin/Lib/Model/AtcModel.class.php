@@ -76,7 +76,7 @@ class AtcModel extends Action{
 		if(isset($atcid)===false){return createarrerr('error_code','atcid 不能为空',$info);}//防止NULL
 
 		$atc=M('atc');
-		$atc->where('atcid='.$id)->setField($get);
+		$atc->where('atcid='.$atcid)->setField($get);
 
 		return createarrok('ok',$data,'',$info);
 	}

@@ -16,7 +16,7 @@ class AtcAction extends Action {
        ##########modify 添加修改中不需要展示和理会的属性 针对para
       'no_update'=>array('atcid','bdnm','atcaddtm','atcmdftm'),
       #####update的时候允许为空的值 针对zabojin刨掉不然显示的update字段后
-      'allowempty'=>array('atcsmr'),
+      'allowempty'=>array('atccv','atcsmr'),
 
       'hide_fld'=>array('atcid','f_atc_bdid','atcctt','atccv','atcsmr'),//NB
       'hide_cdt'=>array('atcid','bdnm'),//NB
@@ -45,7 +45,7 @@ class AtcAction extends Action {
       #####转义
       'transmean'=>array('atctp'=>array('0'=>'否','1'=>'是'),'atcps'=>array('0'=>'否','1'=>'是'),'atcanc'=>array('0'=>'否','1'=>'是'),'atcdnmc'=>array('0'=>'否','1'=>'是'),'atcnw'=>array('0'=>'否','1'=>'是'),'atcvw'=>array('0'=>'否','1'=>'是'),),//NB
       #####默认值
-      'dfltvalue'=>array('atcvw'=>1,'atctp'=>0,'atcps'=>0,'atcanc'=>0,'atcdnmc'=>0,'atccnt'=>0,'atcnw'=>0,'atczn'=>0,'atctc'=>0,'atcvw'=>0),
+      'dfltvalue'=>array('atctp'=>0,'atcps'=>1,'atcanc'=>0,'atcdnmc'=>0,'atccnt'=>0,'atcnw'=>0,'atczn'=>0,'atctc'=>0,'atcvw'=>1),
       
     	);
 
@@ -133,7 +133,7 @@ class AtcAction extends Action {
    		$atc=D('Atc');
 
         $all=$this->all;
-        $get=$_GET;
+        $get=$_POST;
         
         $id=$get['atcid'];
         unset($get['atcid']);

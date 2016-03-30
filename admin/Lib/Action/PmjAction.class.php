@@ -17,7 +17,7 @@ class PmjAction extends Action {
       //自己的全部+f的显示的东西
   		'para'=>array('pmjid'=>'PMJID','f_pmj_grdid'=>'年级','grdnm'=>'年级名称','f_pmj_bxxsid'=>'办学形式','bxxsnm'=>'办学形式名称','f_pmj_ccid'=>'层次','ccnm'=>'层次名称','f_pmj_klid'=>'科类','klnm'=>'科类名称','f_pmj_xxxsid'=>'学习形式','xxxsnm'=>'学习形式名称','f_pmj_zsfwid'=>'招生范围','zsfwnm'=>'招生范围名称','f_pmj_xzid'=>'学制','xznm'=>'学制年限','pmjdm'=>'专业代码','f_pmj_mjid'=>'专业','mjnm'=>'专业名称','pmjbbzs'=>'是否本部招生'),//NB
   		//抛去不是zabojin的属性针对para
-      'notself'=>array('grdnm','bxxsnm','ccnm','klnm','xxxsnm','zsfwnm','zxnm','mjnm'),
+      'notself'=>array('grdnm','bxxsnm','ccnm','klnm','xxxsnm','zsfwnm','xznm','mjnm'),
        ##########modify 添加修改中不需要展示和理会的属性 针对para
       'no_update'=>array('pmjid','grdnm','bxxsnm','ccnm','klnm','xxxsnm','zsfwnm','zxnm','mjnm'),
       #####update的时候允许为空的值 针对zabojin刨掉不然显示的update字段后

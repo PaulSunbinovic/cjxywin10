@@ -148,4 +148,82 @@ class TestAction extends Action {
 
     }
 
+    public function pcls(){
+        $grdnm=$_GET['grdnm'];
+        $grd=M('grd');$grdo=$grd->where("grdnm='".$grdnm."'")->find();
+        $xqstart=$_GET['xqstart'];
+        $xqend=$_GET['xqend'];
+        //先把基放进去
+        $cls=M($grdnm.'_cls');$pcls=M($grdnm.'_pcls');
+        if($grdnm=='2015'){
+            $clsls=$cls->where("clsactvt=1")->select();
+        }else{
+            $clsls=$cls->select();
+        }
+        for($xqid=$xqstart;$xqid<=$xqend;$xqid++){
+            foreach($clsls as $clsv){
+                $dt=array('f_pcls_grdid'=>$grdo['grdid'],'f_pcls_xqid'=>$xqid,'f_pcls_clsid'=>$clsv['clsid']);
+                $pcls->data($dt)->add();
+            }
+            
+        }
+        
+
+    }
+
+    public function setstdxqpcls(){
+        for($i=2013;$i<=2015;$i++){
+            $stdxqpcls=M($i.'_stdxqpcls');
+            $sxpls=$stdxqpcls->select();
+            foreach($sxpls as $sxpv){
+                //提取班级id
+                $clsid=$sxpv['f_stdxqpcls_pclsid'];
+                //提取xqid
+                $xqid=$sxpv['f_stdxqpcls_xqid'];
+                //获取pclsid
+                $pcls=M($i.'_pcls');
+                $pclso=$pcls->where('f_pcls_xqid='.$xqid.' AND f_pcls_clsid='.$clsid)->find();
+                $pclsid=$pclso['pclsid'];
+                $stdxqpclsid=$sxpv['stdxqpclsid'];
+                $dt=array('f_stdxqpcls_pclsid'=>$pclsid);
+                $stdxqpcls->where('stdxqpclsid='.$stdxqpclsid)->setField($dt);
+            }
+        }
+    }
+
+    public function setstdxqpmj(){
+        for($i=2013;$i<=2015;$i++){
+            $stdxqpmj=M($i.'_stdxqpmj');
+            $sxpls=$stdxqpmj->select();
+            foreach($sxpls as $sxpv){
+                $mjid=$sxpv['f_stdxqpmj_pmjid'];
+                $pmj=M($i.'_pmj');
+                $pmjo=$pmj->where('f_pmj_mjid='.$mjid)->find();
+                $pmjid=$pmjo['pmjid'];
+                $dt=array('f_stdxqpmj_pmjid'=>$pmjid);
+                $stdxqpmjid=$sxpv['stdxqpmjid'];
+                $stdxqpmj->where('stdxqpmjid='.$stdxqpmjid)->setField($dt);
+
+            }
+        }
+
+    }
+
+    public function setstdpt(){
+        for($i=2013;$i<=2015;$i++){
+            $std=M($i.'_std');
+            $stdls=$std->select();
+            foreach ($stdls as $stdv) {
+                $stdpt=$stdv['stdpt'];
+                if($stdpt=='/xx/Public/IMG/default.jpg'){
+                    $stdpt='/cjxy/Public/img/usr/default.jpg';
+                }else{
+                    $stdpt=str_replace("xx","cjxy",$stdpt);
+                }
+                $dt=array('stdpt'=>$stdpt);
+                $std->where('stdid='.$stdv['stdid'])->setField($dt);
+            }
+        }
+    }
+
 }

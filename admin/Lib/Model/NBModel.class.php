@@ -205,8 +205,7 @@ class NBModel extends Action{
 				$m->field($fld_str);$this->assign('thls',$thls);
 				$cdt_str='1=1';
 
-				$str_cdt_cross=$this->crossequal($cdt_cross);
-				if($str_cdt_cross){$str_cdt=$str_cdt.' '.$str_cdt_cross;}
+				if($cdt_cross){$cdt_str=$cdt_str.' AND '.$cdt_cross;}
 
 				
 
@@ -222,7 +221,7 @@ class NBModel extends Action{
 				if($spccdt){
 					foreach($spccdt as $spccdtv){$cdt_str=$cdt_str.' AND ('.$spccdtls[$spccdtv][0].') ';}
 				}
-				$m->where($cdt_str);
+				$m->where($cdt_str);//p($m->limit('0,10')->select());die;
 
 				if($odr){
 					$odr_str='';
@@ -272,7 +271,7 @@ class NBModel extends Action{
 					$tmp=explode('id',$tmp[2]);
 					$tmp=$tmp[0];
 					//联动中有这货就不能走常规路了
-					if($linkage[$k]){
+					if($linkage[$k]){//if($k=='f_pcls_usrid'){p($cdt);die;}//  [f_cls_sttid] => 1   usr
 						$arr_display=array();
 						//看看有哪些和他联动
 						$str_lkg='1=1';
@@ -287,13 +286,13 @@ class NBModel extends Action{
 									$tmp=$gnm.'_'.$tmp;
 									$str_lkg=$str_lkg.' AND '.$tmp_lkgk.'='.$cdt[$lkgk];
 								}else{
-									$arr_display=array();break;
+									$str_lkg='1=2';break;//一票否决
 								}
 							}else if($lkgv==1){
 								if($cdt[$lkgk]){
 									$str_lkg=$str_lkg.' AND '.$tmp_lkgk.'='.$cdt[$lkgk];
 								}else{
-									$arr_display=array();break;
+									$str_lkg='1=2';break;//一票否决
 								}
 							}else if($lkgv==0){
 								if($cdt[$lkgk]){

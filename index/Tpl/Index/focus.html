@@ -17,6 +17,23 @@
 				</div>
 			</div>
 		</li>
+		<volist name='atclsfocus' id='atcv'>
+			<li>
+				<a href="__APP__/Atc/view/atcid/{$atcv['atcid']}/atctype/2"><img src="{$atcv['atccv']}" alt=""></a>
+				<div class="slide_infoII">
+					<div class="slide_info_cardII">
+						<a href="#">
+							<div class="slide_info_card_textII">
+								<p>{$atcv['tm']}&nbsp;|&nbsp;{$atcv['atctpc']}</p>
+																
+							</div>
+						</a>
+						<div class="slide_info_card_bgII"></div>
+					</div>
+				</div>
+			</li>
+		</volist>
+		<!--
 		<li>
 			<a href="#"><img src="__PUBLIC__/etc/bxslider/images/img2.png" alt="" title="城市预测"></a>
 			<div class="slide_info">
@@ -73,6 +90,7 @@
 				</div>
 			</div>
 		</li>
+		-->
 	</ul>
 	
 	<div class="op_btns clearfix">

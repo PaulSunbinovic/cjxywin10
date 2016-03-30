@@ -8,11 +8,11 @@ body{}
 .top_slide_wrap{width:100%;height:600px;overflow:hidden;position:relative;z-index:1;}
 .slide_box{height:600px;overflow:hidden;margin:0 auto;}
 .slide_box li{height:600px}
-.slide_box img{width:100%;height:600px}
+.slide_box img{width:100%;height:600px;}
 .slide_info{width:980px;margin:-600px auto 0}
 .slide_info_card{width:420px;height:0;margin-top:171px;color:#fff;position:relative}
 .slide_info_card a{color:#fff;text-decoration:none}
-.slide_info_card .slide_info_card_bg{width:420px;height:200px;background:#000000;position:absolute;top:0;left:0;z-index:1;opacity:.3;*filter:alpha(opacity=30)}
+.slide_info_card .slide_info_card_bg{width:420px;height:200px;background:#000000;position:absolute;top:0;left:0;z-index:1;opacity:.6;*filter:alpha(opacity=60)}
 .slide_info_card .slide_info_card_text{width:340px;height:140px;padding:30px 40px;position:absolute;top:0;left:0;z-index:2}
 .slide_info_card h2{font-size:40px;padding-bottom:8px}
 .slide_info_card p{font-size:15px;line-height:26px}
@@ -26,7 +26,17 @@ body{}
 .op_btns .op_prev span{background-position:0 0;}
 .op_btns .op_next span{background-position:-73px 0;margin-left:20px;}
 /* bx-controls */
-.bx-wrapper .bx-controls{margin-top:-60px}
+.bx-wrapper .bx-controls{margin-top:-80px}
 .bx-wrapper .bx-controls .bx-pager{clear:both;width:100%;text-align:center;position:relative}
 .bx-wrapper .bx-controls .bx-pager a{background:#c2c2c2;width:12px;height:12px;display:inline-block;overflow:hidden;background:url("images/icons_cb372887.png") -116px -90px\9;}
 .bx-wrapper .bx-controls .bx-pager a:hover,.bx-wrapper .bx-controls .bx-pager a.active{background:#0070c6;background:url("images/icons_cb372887.png") 0 -90px\9;}
+
+
+.slide_infoII{width:100%;margin:-600px auto 0}
+.slide_info_cardII{width:100%;height:0;margin-top:560px;color:#fff;position:relative}
+.slide_info_cardII a{color:#fff;text-decoration:none}
+.slide_info_cardII .slide_info_card_bgII{width:100%;height:40px;background:#000000;position:absolute;top:0;left:0;z-index:1;opacity:.6;*filter:alpha(opacity=60)}
+.slide_info_cardII .slide_info_card_textII{width:100%;height:40px;padding:8px 40px;position:absolute;top:0;left:0;z-index:2}
+.slide_info_cardII h2{font-size:40px;padding-bottom:8px}
+.slide_info_cardII p{font-size:15px;line-height:26px}
+.slide_info_cardII p strong{font-size:12px;height:25px;display:inline-block;padding:0 10px;background:#095b99;border-radius:5px;color:#fff;mar

@@ -47,7 +47,16 @@ var app_path='__APP__';
   </div>
   <style>.nav_a a{color:#fff;padding-left: 20px;padding-right: 20px;height:40px;line-height: 40px;padding-top:12px;padding-bottom: 10px}</style>
   <div class='col-md-12 nav_a' style='height:40px;color:#fff;background-color: #449d44;font-size: 16px;padding-left: 50px'>
-    <a id='tzgg'>通知公告</a><a id='yxdt'>院校动态</a><a id='hsyd'>函授夜大</a><a id='jxjy'>继续教育</a><a id='zkzx'>自考助学</a><a id='dqhd'>党群活动</a><a id='jgzc'>教工之窗</a><a id='xsfc'>学生风采</a><a id='zxrd'>咨询热点</a>
+    <a href='__APP__'>首页</a>
+    <a id='tzgg' href='__APP__/Atc/query/atctype/1'>通知公告</a>
+    <a id='yxdt' href='__APP__/Atc/query/atctype/2'>院校动态</a>
+    <a id='hsyd' href='__APP__/Atc/query/bdid/15'>函授夜大</a>
+    <a id='jxjy' href='__APP__/Atc/query/bdid/16'>继续教育</a>
+    <a id='zkzx' href='__APP__/Atc/query/bdid/17'>自考助学</a>
+    <a id='dqhd' href='__APP__/Atc/query/bdid/18'>党群活动</a>
+    <a id='jgzc' href='__APP__/Atc/query/bdid/19'>教工之窗</a>
+    <a id='xsfc' href='__APP__/Atc/query/bdid/20'>学生风采</a>
+    <a id='zxrd' href='__APP__/Atc/query/bdid/21'>咨询热点</a>
   </div>
   <script>
     $('#'+"{$atctype}").css('background-color','#5cb85c');
@@ -65,11 +74,14 @@ var app_path='__APP__';
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">用户登录</h4>
+        <h4 class="modal-title" id="myModalLabel">平台登录</h4>
       </div>
       <div class="modal-body">
-        ...
+        <div class='col-md-4'><a href='__ROOT__/admin.php' class='btn btn-primary btn-lg btn-block'><i class='glyphicon glyphicon-user'></i> 管理登录</a></div>
+        <div class='col-md-4'><a class='btn btn-success btn-lg btn-block'><i class='glyphicon glyphicon-book'></i> 教师登录</a></div>
+        <div class='col-md-4'><a class='btn btn-warning btn-lg btn-block'><i class='glyphicon glyphicon-education'></i> 学生登录</a></div>
       </div>
+      <div class='clearfix' style="height:50px"></div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
         

@@ -210,8 +210,10 @@ $(function(){
             for(var i=0;i<data.length;i++){
               var aim=data[i]['aim'];
               var str="<option value=''>无</option>";
-              for(var j=0;j<data[i]['ls'].length;j++){
-                str=str+"<option value='"+data[i]['ls'][j][data[i]['prex']+'id']+"'>"+data[i]['ls'][j][data[i]['prex']+'nm']+"</option>"
+              if(data[i]['ls']){
+                for(var j=0;j<data[i]['ls'].length;j++){
+                  str=str+"<option value='"+data[i]['ls'][j][data[i]['prex']+'id']+"'>"+data[i]['ls'][j][data[i]['prex']+'nm']+"</option>";
+                }
               }
               $('#'+aim+'_nb_cdt').html(str);
             }

@@ -279,7 +279,7 @@ class PBModel extends Action{
 
 		$arr_rslt=array();
 
-		foreach($linkage as $aim=>$factors){
+		foreach($linkage as $aim=>$factors){//aim  f_pcls_usrid     |     $tmp usr  | linkage   f_cls_sttid => 1
 			if(isset($factors[$trigger])){
 
 				//会引起哪个m需要判断
@@ -302,13 +302,13 @@ class PBModel extends Action{
 							$tmp=$gnm.'_'.$tmp;
 							$str_lkg=$str_lkg.' AND '.$tmp_lkgk.'='.$get[$lkgk];
 						}else{
-							$arr_display=array();break;
+							$str_lkg='1=2';break;//一票否决
 						}
 					}else if($lkgv==1){
 						if($get[$lkgk]){
 							$str_lkg=$str_lkg.' AND '.$tmp_lkgk.'='.$get[$lkgk];
 						}else{
-							$arr_display=array();break;
+							$str_lkg='1=2';break;//一票否决
 						}
 					}else if($lkgv==0){
 						if($get[$lkgk]){
@@ -419,41 +419,46 @@ class PBModel extends Action{
 
     	$g=M($splitmark);
 
+    	if($id==0){$mo=$dfltvalue;$pattern='添加';}else{
+    		$arr_mo=$this->getmoBBB($gid,$splitmark,$mdmk,$id,$para,$jn_same,$jn);$mo=$arr_mo['data'];$pattern='修改';
+    	}
+
     	if($defaultls){
 	    	//甭管添加还是修改 zabojingua 属性必须要ls给好
 	    	foreach ($para as $k => $v) {
-				if(!in_array($k,$hide_cdt)&&strstr($k,'_')){
+				if(!in_array($k,$hide_cdt)&&strstr($k,'_')){//|tmp|f_pcls_usrid|usr   
 					
 					$tmp=explode('_', $k);
 					$tmp=explode('id',$tmp[2]);
-					$tmp=$tmp[0];
+					$tmp=$tmp[0];//usr
 					//联动中有这货就不能走常规路了
 					if($linkage[$k]){
 						$arr_display=array();
 						//看看有哪些和他联动
 						$str_lkg='1=1';
-						foreach($linkage[$k] as $lkgk=>$lkgv){
+						//f_pcls_usrid    f_cls_sttid=>1
+						foreach($linkage[$k] as $lkgk=>$lkgv){//f_
 							//由于十有八九$lkgk[eg:f_bbb_grdid]借别人来限制自己的，所以需要把字段转化成自己看得懂的字段
-							$tmp_lkgk=explode('_',$lkgk);$tmp_lkgk=$tmp_lkgk[0].'_'.$tmp.'_'.$tmp_lkgk[2];
+							$tmp_lkgk=explode('_',$lkgk);$tmp_lkgk=$tmp_lkgk[0].'_'.$tmp.'_'.$tmp_lkgk[2];//f_usr_sttid
 							$tmpnm=$tmp.'nm';
 							if($lkgv==2){
-								if($gid){
-									$go=$g->where($splitmark.'id'.'='.$gid)->find();
+								if($mo[$lkgk]){
+									$go=$g->where($splitmark.'id'.'='.$mo[$lkgk])->find();
 									$gnm=$go[$splitmark.'nm'];
 									$tmp=$gnm.'_'.$tmp;
-									$str_lkg=$str_lkg.' AND '.$tmp_lkgk.'='.$gid;
+									$str_lkg=$str_lkg.' AND '.$tmp_lkgk.'='.$mo[$lkgk];
 								}else{
-									$arr_display=array();break;
+									$str_lkg='1=2';break;//一票否决
 								}
 							}else if($lkgv==1){
-								if($gid){
-									$str_lkg=$str_lkg.' AND '.$tmp_lkgk.'='.$gid;
+								if($mo[$lkgk]){
+									$str_lkg=$str_lkg.' AND '.$tmp_lkgk.'='.$mo[$lkgk];
 								}else{
-									$arr_display=array();break;
+									$str_lkg='1=2';break;//一票否决
 								}
 							}else if($lkgv==0){
-								if($gid){
-									$str_lkg=$str_lkg.' AND '.$tmp_lkgk.'='.$gid;
+								if($mo[$lkgk]){
+									$str_lkg=$str_lkg.' AND '.$tmp_lkgk.'='.$mo[$lkgk];
 								}
 							}
 							

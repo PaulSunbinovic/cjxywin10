@@ -1,0 +1,229 @@
+<!--筛选部分-->
+<script>
+  var dosearch='__APP__/NB/dosearch';
+  var obj = new Object();
+  var dolinkage='__URL__/dolinkage';
+</script>
+
+<div class='col-md-12' style='margin-top: 20px'>
+  <div class="panel-group" id="accordion1" role="tablist" aria-multiselectable="true">
+    <div class="panel panel-default">
+      <div class="panel-heading" role="tab" id="headingOne">
+        <h4 class="panel-title">
+          <a class='collapsed' data-toggle="collapse" data-parent="#accordion1" href="#collapseOne1" aria-expanded="false" aria-controls="collapseOne1">
+            字段-条件-排序 筛选
+          </a>
+        </h4>
+      </div>
+      <div id="collapseOne1" class="panel-collapse collapsing" role="tabpanel" aria-expanded="false" aria-labelledby="headingOne1">
+        <div class="panel-body">
+          <!---->
+          <div role="tabpanel">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+              <li role="presentation" class="active"><a href="#cdt" aria-controls="cdt" role="tab" data-toggle="tab">条件</a></li>
+              <li role="presentation"><a href="#spccdt" aria-controls="spccdt" role="tab" data-toggle="tab">特殊条件</a></li>
+              <li role="presentation"><a href="#fld" aria-controls="fld" role="tab" data-toggle="tab">字段</a></li>
+              <li role="presentation"><a href="#odr" aria-controls="odr" role="tab" data-toggle="tab">顺序</a></li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content" style="padding-top: 10px">
+
+              <div role="tabpanel" class="tab-pane active" id="cdt">
+               
+              <?php foreach ($para as $key => $value) {
+                if(!in_array($key,$hide_cdt)){
+              ?>
+              <div class='col-md-3'>
+              {$value} 
+              <?php if(strstr($key,'_')){ ?>
+              <select class='cdt' id='{$key}_nb_cdt'>
+                <?php //处理萃取下主题
+                  $tmp=explode('_', $key);$tmp=explode('id',$tmp[2]);$tmp=$tmp[0];
+                ?>
+                <option value="">无</option>
+                <volist name='$key' id='v'><option value="<?php echo $v[$tmp.'id'] ?>"><?php echo $v[$tmp.'nm'] ?></option></volist>
+              </select>
+              <?php }else if(isset($transmean[$key])==true){ ?>
+              <select class='cdt' id='{$key}_nb_cdt'>
+                <option value="">无</option>
+                <?php foreach ($transmean[$key] as $tk => $tv){ ?>
+                <option value='{$tk}'>{$tv}</option>
+                <?php } ?>
+              </select>
+              <?php }else{ ?>
+              <input class='cdt' id='{$key}_nb_cdt'><?php } ?>
+              </div>
+              <?php
+                }
+              } ?>  
+              </div>
+              <script><?php foreach ($cdt as $cdtvk => $cdtvv) { ?>$('#'+"{$cdtvk}"+'_nb_cdt').val("{$cdtvv}");<?php } ?></script>
+
+              <div role="tabpanel" class="tab-pane" id="spccdt">
+              <?php foreach($spccdtls as $spccdtvk=>$spccdtvv){ ?>
+                <div class='col-md-4'>
+                <button class='spccdt btn <?php if(in_array($spccdtvk,$spccdt)){ ?> btn-info <?php }else{ ?>btn-default<?php } ?>' value='{$spccdtvk}'>{$spccdtvv[1]}</button>
+                </div>
+              <?php } ?>
+              </div>
+
+              <script>var fldu='-';</script>
+              <div role="tabpanel" class="tab-pane" id="fld">
+              <?php foreach ($para as $key => $value) {
+                if(!in_array($key,$hide_fld)){
+              ?>
+              <div class='col-md-2'><input class='fld' type="checkbox" id='{$key}_nb_fld' <?php if(in_array($key,$fld)){ ?>checked<?php } ?> > {$value}</div>
+              <?php 
+                }
+              ?>
+              <script>fldu=fldu+"{$key}"+'-';</script>
+              <?php 
+              }
+              ?>
+              </div>
+
+              <div role="tabpanel" class="tab-pane" id="odr">
+                <?php foreach($odrls as $odrv){ ?>
+                  <div class='col-md-4'>
+                  {$para[$odrv]} <select class='odr' id='{$odrv}_nb_odr'><option value="">无</option><option value="ASC">升序</option><option value="DESC">降序</option></select>
+                  </div>
+                <?php } ?>
+                <script><?php foreach($odr as $odrvk=>$odrvv){ ?>$('#'+'{$odrvk}'+'_nb_odr').val('{$odrvv}');<?php } ?></script>
+              </div>
+            </div>
+
+          </div>
+         <!---->
+         <div class='clearfix'></div><hr>
+         <div>每页<select id='nb_lmt' style='width: 60px'><option value='10'>10</option><option value='20'>20</option><option value='50'>50</option><option value='100'>100</option></select><script>$('#nb_lmt').val("{$lmt}");</script></div>
+         <div style="margin-top: 10px"><button class='btn btn-primary' id='search'>查询</button></div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</div>
+<script>
+  $(function(){
+    $('#search').click(function(){
+      
+      //处理cdt
+      var cdtls=$('.cdt');
+      for(var i=0;i<cdtls.size();i++){
+        cdto=cdtls[i];var id_cdt=$(cdto).attr('id');
+        if($.trim($(cdto).val())!=''){
+          obj[id_cdt]=$.trim($(cdto).val());
+        }
+      }
+      //处理spccdt
+      var spccdtls=$('.spccdt');
+      for(var i=0;i<spccdtls.size();i++){
+        spccdto=spccdtls[i]; 
+        var cls=$(spccdto).attr('class');
+        if(cls.indexOf('info')!=-1){
+          obj[i+'_nb_spccdt']=$(spccdto).val();
+        }
+      }
+      //处理fld,未选中的fld需要从里头除名
+      var fldls=$('.fld');
+      for(var i=0;i<fldls.size();i++){
+        fldo=fldls[i];
+        if($(fldo).is(':checked')==false){
+          var id_fld=$(fldo).attr('id');
+          id_fld=id_fld.split('_nb_fld')['0'];
+          fldu=fldu.replace(id_fld+'-','');
+        }
+      }
+      obj['nb_fld']=fldu;
+      
+      //处理odr
+      var odrls=$('.odr');
+      for(var i=0;i<odrls.size();i++){
+        odro=odrls[i];var id_odr=$(odro).attr('id');
+        if($(odro).val()!=''){
+          obj[id_odr]=$(odro).val();
+        }
+      }
+      //处理lmt
+      obj['nb_lmt']=$('#nb_lmt').val();
+
+      //处理mdmk
+      obj['nb_mdmk']="{$mdmk}";
+
+      $.ajax({
+          'type': 'GET',
+          'url':dosearch,
+          'async':false,  
+          'contentType': 'application/json',
+          'data': obj,
+          'dataType': 'json',
+          'success': function(data) {
+            //alert(data['url']);
+            window.location.href=data['url'];
+            console.log("success");
+          },
+          'error':function() {
+            console.log("error");
+          }
+      });
+    })
+
+    //#############
+    $('.spccdt').click(function(){
+      var cls=$(this).attr('class');
+      if(cls.indexOf('info')!=-1){
+        cls=cls.replace('info','default');
+      }else{
+        cls=cls.replace('default','info');
+      }
+      $(this).attr('class',cls);
+    })
+    
+  })
+</script>
+
+<script>
+
+$(function(){
+  //记录
+  var ipf=new Array();
+  <?php foreach($impactfactor as $ifv){ ?>
+    ipf.push("{$ifv}");
+  <?php } ?>
+  <?php foreach($impactfactor as $ifv){ ?>
+    $('#'+"{$ifv}"+'_nb_cdt').change(function(){
+      var obj=new Object();
+      obj['trigger']="{$ifv}";
+      for(var i=0;i<ipf.length;i++){
+        obj[ipf[i]]=$('#'+ipf[i]+'_nb_cdt').val();
+      }
+      $.ajax({
+          'type': 'GET',
+          'url':dolinkage,
+          'async':false,  
+          'contentType': 'application/json',
+          'data': obj,
+          'dataType': 'json',
+          'success': function(data) {
+            for(var i=0;i<data.length;i++){
+              var aim=data[i]['aim'];
+              var str="<option value=''>无</option>";
+              if(data[i]['ls']){
+                for(var j=0;j<data[i]['ls'].length;j++){
+                  str=str+"<option value='"+data[i]['ls'][j][data[i]['prex']+'id']+"'>"+data[i]['ls'][j][data[i]['prex']+'nm']+"</option>";
+                }
+              }
+              $('#'+aim+'_nb_cdt').html(str);
+            }
+          },
+          'error':function() {
+            console.log("error");
+          }
+      });
+    })
+  <?php } ?>
+})
+
+</script>

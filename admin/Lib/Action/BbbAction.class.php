@@ -37,7 +37,7 @@ class BbbAction extends Action {
       'odr_dflt'=>array(),//NB
       //hide的fld必须有，他们虽然不显示但是必须选择，这样才能在第一次进入query的时候，隐藏属性可以被调用，特别是id和fid
   		'fld_dflt'=>array('bbbid','f_bbb_grdid','grdnm','bbbnm','f_bbb_cccid','cccnm','f_bbb_dddid','dddnm'),//NB
-  		'cdt_dflt'=>array(),//NB
+  		'cdt_dflt'=>array('f_bbb_grdid'=>3),//NB
   		
   		'lmt_dflt'=>10,//NB
   		
@@ -106,8 +106,8 @@ class BbbAction extends Action {
     //公版
     public function dolinkage(){
       header("Content-Type:text/html; charset=utf-8");
-      $pb=D('PB');
-      $arr=$pb->dolinkage($this->all);
+      $nb=D('NB');
+      $arr=$nb->dolinkage($this->all);
       
       $data=$arr['data'];
       

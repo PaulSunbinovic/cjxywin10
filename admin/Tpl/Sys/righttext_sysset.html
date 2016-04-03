@@ -1,0 +1,31 @@
+<div class='col-md-12' style='padding-top:50px'>
+	<a href='#' class='btn btn-success btn-lg' id='setnewxq'>设置新学期</a>
+	<p>设置新学期目前包括 如果是开年学期，比如2012-2013 第2学期，需要开辟新年级，复制去年函授站点有的数据，默认去年怎么招，今年也怎么招，大不了以后微调。说白了就是创建2013XXX</p>
+	<p>完了以后就是，更新班级，新学期班级照旧（具体何时停止以后考虑），对老生的数据更新，新学期自动上学期在校的老生，本学期再次自动选专业，自动选班级。</p>
+</div>
+
+<script type="text/javascript">
+	var dosetnewxq='__URL__/dosetnewxq';
+	$(function(){
+		$('#setnewxq').click(function(){
+			$('#loading').trigger('click');
+			$.ajax({
+		        'type': 'GET',
+		        'url':dosetnewxq,
+		        'async':false,  
+		        'contentType': 'application/json',
+		        'data': {},
+		        'dataType': 'json',
+		        'success': function(data) {
+		        	$('#close_loading').trigger('click');
+		        	alert('产生完成！');
+		            console.log("success");
+		        },
+		        'error':function() {
+		            console.log("error");
+		        }
+		    });
+		})
+	})
+	
+</script>

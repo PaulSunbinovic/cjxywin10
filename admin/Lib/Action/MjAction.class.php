@@ -16,7 +16,7 @@ class MjAction extends Action {
        ##########modify 添加修改中不需要展示和理会的属性 针对para
       'no_update'=>array('mjid',),
       #####update的时候允许为空的值 针对zabojin刨掉不然显示的update字段后
-      'allowempty'=>array(),
+      'allowempty'=>array('mjdsc'),
 
       'hide_fld'=>array('mjid'),//NB
       'hide_cdt'=>array('mjid'),//NB

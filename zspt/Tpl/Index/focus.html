@@ -1,0 +1,112 @@
+<!--焦点图开始-->
+<link rel="stylesheet" href="__PUBLIC__/etc/bxslider/jquery.bxslider.css">
+<link rel="stylesheet" href="__PUBLIC__/etc/bxslider/style.css">
+<div class="top_slide_wrap">
+	<ul class="slide_box bxslider">
+		<li>
+			<a href="#"><img src="__PUBLIC__/etc/bxslider/images/img3.png" alt=""></a>
+			<div class="slide_info">
+				<div class="slide_info_card">
+					<a href="#">
+						<div class="slide_info_card_text">
+							<p>学校成人高等教育经过3 0多年的教学实践，积累了丰富的办学经验，形成了鲜明的办学特色，已形成学历教育与非学历教育并举、多层次、多形式的办学体系。设有夜大学（业余）、函授、自学考试等学历教育</p>
+							
+						</div>
+					</a>
+					<div class="slide_info_card_bg"></div>
+				</div>
+			</div>
+		</li>
+		<volist name='atclsfocus' id='atcv'>
+			<li>
+				<a href="__APP__/Atc/view/atcid/{$atcv['atcid']}/atctype/2"><img src="{$atcv['atccv']}" alt=""></a>
+				<div class="slide_infoII">
+					<div class="slide_info_cardII">
+						<a href="#">
+							<div class="slide_info_card_textII">
+								<p>{$atcv['tm']}&nbsp;|&nbsp;{$atcv['atctpc']}</p>
+																
+							</div>
+						</a>
+						<div class="slide_info_card_bgII"></div>
+					</div>
+				</div>
+			</li>
+		</volist>
+		<!--
+		<li>
+			<a href="#"><img src="__PUBLIC__/etc/bxslider/images/img2.png" alt="" title="城市预测"></a>
+			<div class="slide_info">
+				<div class="slide_info_card">
+					<a href="#">
+						<div class="slide_info_card_text">
+							<p>哪些城市将被挤爆，哪里的人最爱旅游，城市旅游预测尽在掌握</p>
+							
+						</div>
+					</a>
+					<div class="slide_info_card_bg"></div>
+				</div>
+			</div>
+		</li>
+		<li>
+			<a href="#"><img src="__PUBLIC__/etc/bxslider/images/img1.png" alt=""></a>
+			<div class="slide_info">
+				<div class="slide_info_card">
+					<a href="#">
+						<div class="slide_info_card_text">
+							<p>提供全国5A景区未来2日人流及舒适度的预测，为您短期旅游出行参考</p>
+							
+						</div>
+					</a>
+					<div class="slide_info_card_bg"></div>
+				</div>
+			</div>
+		</li>
+		<li>
+			<a href="#"><img src="__PUBLIC__/etc/bxslider/images/img3.png" alt=""></a>
+			<div class="slide_info">
+				<div class="slide_info_card">
+					<a href="#">
+						<div class="slide_info_card_text">
+							<p>全国大学和专业哪些热门？哪些好考？高考预测，您的报考决策指南</p>
+							
+						</div>
+					</a>
+					<div class="slide_info_card_bg"></div>
+				</div>
+			</div>
+		</li>
+		<li>
+			<a href="#"><img src="__PUBLIC__/etc/bxslider/images/img2.png" alt=""></a>
+			<div class="slide_info">
+				<div class="slide_info_card">
+					<a href="#">
+						<div class="slide_info_card_text">
+							<p>流感来袭，哪个城市比较安全？治疗肝炎，哪个医院最受关注？疾病预测，您的流行病防治小帮手。</p>
+							
+						</div>
+					</a>
+					<div class="slide_info_card_bg"></div>
+				</div>
+			</div>
+		</li>
+		-->
+	</ul>
+	
+	<div class="op_btns clearfix">
+		<a href="#" class="op_btn op_prev"><span></span></a>
+		<a href="#" class="op_btn op_next"><span></span></a>
+
+	</div>
+	
+</div>
+<script type="text/javascript" src="__PUBLIC__/etc/bxslider/jquery.bxslider_e88acd1b.js"></script>
+<script type="text/javascript">
+(function(){
+	$(".bxslider").bxSlider({
+		auto:true,
+		prevSelector:$(".top_slide_wrap .op_prev")[0],nextSelector:$(".top_slide_wrap .op_next")[0]
+	});
+})();
+</script>
+<!--焦点图结束-->

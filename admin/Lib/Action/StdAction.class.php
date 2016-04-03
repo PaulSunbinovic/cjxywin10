@@ -15,13 +15,13 @@ class StdAction extends Action {
 
   		'jn'=>array('tb_xq ON f_stdxqpmj_xqid=xqid','tb_stt ON f_std_sttid=sttid','tb_grd ON f_std_grdid=grdid','tb_sex ON f_std_sexid=sexid','tb_rc ON f_std_rcid=rcid','tb_zzmm ON f_std_zzmmid=zzmmid','tb_xl ON f_std_xlid=xlid','tb_stat ON f_std_statid=statid','tb_bxxs ON f_pmj_bxxsid=bxxsid','tb_cc ON f_pmj_ccid=ccid','tb_kl ON f_pmj_klid=klid','tb_xxxs ON f_pmj_xxxsid=xxxsid','tb_zsfw ON f_pmj_zsfwid=zsfwid','tb_xz ON f_pmj_xzid=xzid','tb_mj ON f_pmj_mjid=mjid','tb_dm ON f_stdxqdm_dmid=dmid'),//NB
       //自己的全部+f的显示的东西
-  		'para'=>array('stdid'=>'stdID','f_std_sttid'=>'站点','sttnm'=>'站点名称','f_std_grdid'=>'年级','grdnm'=>'年级名称','f_stdxqpmj_xqid'=>'学期','xqnm'=>'学期','f_pmj_bxxsid'=>'办学形式','bxxsnm'=>'办学形式名称','f_pmj_ccid'=>'层次','ccnm'=>'层次名称','f_pmj_klid'=>'科类','klnm'=>'科类名称','f_pmj_xxxsid'=>'学习形式','xxxsnm'=>'学习形式名称','f_pmj_zsfwid'=>'招生范围','zsfwnm'=>'招生范围名称','f_pmj_xzid'=>'学制','xznm'=>'学制','f_stdxqpmj_pmjid'=>'专业','mjnm'=>'专业','f_stdxqpcls_pclsid'=>'班级','clsnm'=>'班级','f_stdxqdm_dmid'=>'住宿','dmnm'=>'住宿','f_std_statid'=>'状态','statnm'=>'状态','stdaplno'=>'报名号','stdno'=>'学号','stdupfnctm'=>'上传财务时间','stdnm'=>'姓名','stdpw'=>'密码','stdpt'=>'照片','f_std_sexid'=>'性别','sexnm'=>'性别','f_std_rcid'=>'民族','rcnm'=>'民族','f_std_zzmmid'=>'政治面貌','zzmmnm'=>'政治面貌','stdnp'=>'籍贯','stdbtd'=>'出生年月','stdsol'=>'文理科','stdcee'=>'高考成绩','stdsog'=>'毕业学校','stdqq'=>'QQ','f_std_xlid'=>'学历','xlnm'=>'学历','stdidcd'=>'身份证号码','stdcp'=>'手机号码','stdrlta'=>'家长一','stdrltanm'=>'家长一姓名','stdrltaocpt'=>'家长一职业','stdrltacp'=>'家长一电话','stdrltb'=>'家长二','stdrltbnm'=>'家长二姓名','stdrltbocpt'=>'家长二职业','stdrltbcp'=>'家长二电话','stdhb'=>'好爱','stdpst'=>'邮编','stdads'=>'地址','stdmdftm'=>'修改时间','stdaddtm'=>'添加时间','stdtlp'=>'固话','stdpertm'=>'预录取时间','stdertm'=>'录取时间','stdicbc'=>'工行卡号','stdrcmdnm'=>'推荐人姓名','stdrcmdcp'=>'推荐人手机号','stdpnttm'=>'打印时间'),//NB
+  		'para'=>array('stdid'=>'stdID','f_std_sttid'=>'站点','sttnm'=>'站点','f_std_grdid'=>'年级','grdnm'=>'年级','f_stdxqpmj_xqid'=>'学期','xqnm'=>'学期','f_pmj_bxxsid'=>'办学形式','bxxsnm'=>'办学形式','f_pmj_ccid'=>'层次','ccnm'=>'层次','f_pmj_klid'=>'科类','klnm'=>'科类','f_pmj_xxxsid'=>'学习形式','xxxsnm'=>'学习形式','f_pmj_zsfwid'=>'招生范围','zsfwnm'=>'招生范围','f_pmj_xzid'=>'学制','xznm'=>'学制','f_stdxqpmj_pmjid'=>'专业','mjnm'=>'专业','f_stdxqpcls_pclsid'=>'班级','clsnm'=>'班级','f_stdxqdm_dmid'=>'住宿','dmnm'=>'住宿','f_std_statid'=>'状态','statnm'=>'状态','stdaplno'=>'报名号','stdno'=>'学号','stdupfnctm'=>'上传财务时间','stdnm'=>'姓名','stdpw'=>'密码','stdpt'=>'照片','f_std_sexid'=>'性别','sexnm'=>'性别','f_std_rcid'=>'民族','rcnm'=>'民族','f_std_zzmmid'=>'政治面貌','zzmmnm'=>'政治面貌','stdnp'=>'籍贯','stdbtd'=>'出生年月','stdsol'=>'文理科','stdcee'=>'高考成绩','stdsog'=>'毕业学校','stdqq'=>'QQ','f_std_xlid'=>'学历','xlnm'=>'学历','stdidcd'=>'身份证号码','stdcp'=>'手机号码','stdrlta'=>'家长一','stdrltanm'=>'家长一姓名','stdrltaocpt'=>'家长一职业','stdrltacp'=>'家长一电话','stdrltb'=>'家长二','stdrltbnm'=>'家长二姓名','stdrltbocpt'=>'家长二职业','stdrltbcp'=>'家长二电话','stdhb'=>'好爱','stdpst'=>'邮编','stdads'=>'地址','stdmdftm'=>'修改时间','stdaddtm'=>'添加时间','stdtlp'=>'固话','stdpertm'=>'预录取时间','stdertm'=>'录取时间','stdicbc'=>'工行卡号','stdrcmdnm'=>'推荐人姓名','stdrcmdcp'=>'推荐人手机号','stdpnttm'=>'打印时间'),//NB
   		//抛去不是zabojin的属性针对para
       'notself'=>array('sttnm','grdnm','f_stdxqpmj_xqid','xqnm','f_pmj_bxxsid','bxxsnm','f_pmj_ccid','ccnm','f_pmj_klid','klnm','f_pmj_xxxsid','xxxsnm','f_pmj_zsfwid','zsfwnm','f_pmj_xzid','xznm','mjnm','f_stdxqpmj_pmjid','mjnm','f_stdxqpcls_pclsid','clsnm','f_stdxqdm_dmid','dmnm','sexnm','rcnm','zzmmnm','xlnm','statnm'),
        ##########modify 添加修改中不需要展示和理会的属性 针对para
-      'no_update'=>array('stdid','grdnm','cccnm','dddnm'),
+      'no_update'=>array('stdid','sttnm','grdnm','xqnm','bxxsnm','ccnm','klnm','xxxsnm','zsfwnm','xznm','mjnm','clsnm','dmnm','statnm','sexnm','rcnm','zzmmnm','xlnm'),
       #####update的时候允许为空的值 针对zabojin刨掉不然显示的update字段后
-      'allowempty'=>array('bbbnm'),
+      'allowempty'=>array('f_pmj_bxxsid','f_pmj_ccid','f_pmj_klid','f_pmj_xxxsid','f_pmj_zsfwid','f_pmj_xzid','stdaplno','stdno','stdupfnctm','stdsol','stdcee','stdsog','stdqq','f_std_xlid','stdcp','stdtlp','stdpertm','stdertm','stdicbc','stdrcmdnm','stdrcmdcp','stdpnttm'),
 
       'hide_fld'=>array('stdid','f_std_sttid','f_std_grdid','f_stdxqpmj_xqid','f_pmj_bxxsid','f_pmj_ccid','f_pmj_klid','f_pmj_xxxsid','f_pmj_zsfwid','f_pmj_xzid','f_stdxqpmj_pmjid','f_stdxqpcls_pclsid','f_stdxqdm_dmid','f_std_sexid','f_std_rcid','f_std_zzmmid','f_std_xlid','f_std_statid'),//NB
       'hide_cdt'=>array('stdid','sttnm','grdnm','xqnm','bxxsnm','ccnm','klnm','xxxsnm','zsfwnm','xznm','mjnm','clsnm','dmnm','sexnm','rcnm','zzmmnm','xlnm','statnm'),//NB
@@ -43,7 +43,7 @@ class StdAction extends Action {
   		
   		'defaultls'=>1,//默认枚举//NB
   		##########view
-  		'no_view'=>array('bbbid','f_bbb_grdid','f_bbb_cccid','f_bbb_dddid'),
+  		'no_view'=>array('stdid','f_std_sttid','f_std_grdid','f_stdxqpmj_xqid','f_pmj_bxxsid','f_pmj_ccid','f_pmj_klid','f_pmj_xxxsid','f_pmj_zsfwid','f_pmj_xzid','f_stdxqpmj_pmjid','f_stdxqpcls_pclsid','f_stdxqdm_dmid','f_std_statid','stdpw','f_std_sexid','f_std_rcid','f_std_zzmmid','f_std_xlid'),
 	   
       #########删除提醒
       'deleteconfirm'=>'确定要删除此条记录？',
@@ -53,34 +53,40 @@ class StdAction extends Action {
       'dfltvalue'=>array(),
       ####这里新建对照表 也就是联动机制，谁被谁影响，用户select效果极佳
       ###example
-      'linkage'=>array('f_stdxqpmj_pmjid'=>array('f_std_grdid'=>2,'f_stdxqpmj_xqid'=>1,'f_pmj_bxxsid'=>2,'f_pmj_ccid'=>2,'f_pmj_klid'=>2,'f_pmj_xxxsid'=>2,'f_pmj_zsfwid'=>2,'f_pmj_xzid'=>2),'f_stdxqpcls_pclsid'=>array('f_std_grdid'=>2,'f_stdxqpmj_xqid'=>1)),//如果ccc的变换需要转换成2015_ccc 就是2  否则如果是1 非2情况下联动没有值，不允许下拉，3联动不造成下拉有无
+      'linkage'=>array('f_stdxqpmj_pmjid'=>array('f_std_grdid'=>2,'f_pmj_bxxsid'=>0,'f_pmj_ccid'=>0,'f_pmj_klid'=>0,'f_pmj_xxxsid'=>0,'f_pmj_zsfwid'=>0,'f_pmj_xzid'=>0,'f_std_sttid'=>1),'f_stdxqpcls_pclsid'=>array('f_std_grdid'=>2,'f_stdxqpmj_xqid'=>1,'f_std_sttid'=>1)),//如果ccc的变换需要转换成2015_ccc 就是2  否则如果是1 非2情况下联动没有值，不允许下拉，3联动不造成下拉有无
       ########这里是谁影响谁，用在AJAX联动 效果极佳
-      'impactfactor'=>array('f_std_grdid','f_stdxqpmj_xqid','f_pmj_bxxsid','f_pmj_ccid','f_pmj_klid','f_pmj_xxxsid','f_pmj_zsfwid','f_pmj_xzid'),
+      'impactfactor'=>array('f_std_sttid','f_std_grdid','f_stdxqpmj_xqid','f_pmj_bxxsid','f_pmj_ccid','f_pmj_klid','f_pmj_xxxsid','f_pmj_zsfwid','f_pmj_xzid'),
       
     	);
 
     //
     public function query(){
     	header("Content-Type:text/html; charset=utf-8");
-    	$pb=D('PB');$usr=D('Usr');$xq=D('Xq');$grd=D('Grd');$stat=D('Stat');
+    	$pb=D('PB');$usr=D('Usr');$xq=D('Xq');$grd=D('Grd');$stat=D('Stat');$std=D('Std');
       //需要改变一些参数
       $all=$this->all;
       //给出默认站点 默认年级（全部遍历确实太慢了） 默认学期 
       $arr_usro=$usr->getusrobyusrid(session('usridss'));$usro=$arr_usro['data'];
       $sttid=$usro['f_usr_sttid'];$all['cdt_dflt']['f_std_sttid']=$sttid;
-      $arr_grdo=$grd->getgrdobyrecent();$grdo=$arr_grdo['data'];
+      $arr_grdo=$grd->getgrdobydflt();$grdo=$arr_grdo['data'];
       $grdid=$grdo['grdid'];$all['cdt_dflt']['f_std_grdid']=$grdid;
       $arr_xqo=$xq->getxqobydq();$xqo=$arr_xqo['data'];
       $xqid=$xqo['xqid'];$all['cdt_dflt']['f_stdxqpmj_xqid']=$xqid;
 
     	$pb->queryBBB($all);
 
-
       //覆盖下stat列表
       $arr_statls=$stat->getstatlsbyjiaowu();$statls=$arr_statls['data'];
       $this->assign('f_std_statid',$statls);
 
+
+      //专门针对联动初始值
+      $get=$all['cdt_dflt'];
+      $std->initlinkage($all,$get);
+
       $this->display('query');
+
+
   
     }
     
@@ -95,8 +101,13 @@ class StdAction extends Action {
    	//公版
    	public function update(){
    		header("Content-Type:text/html; charset=utf-8");
-    	$pb=D('PB');
-    	$pb->updateBBB($this->all);
+    	$pb=D('PB');$std=D('Std');
+    	$arr_mo=$pb->updateBBB($this->all);$mo=$arr_mo['data'];
+
+      //专门针对联动初始值
+      $get=$mo;
+      $std->initlinkage($this->all,$get);
+
 		  $this->display('CmnBBB:update');
    	}
 

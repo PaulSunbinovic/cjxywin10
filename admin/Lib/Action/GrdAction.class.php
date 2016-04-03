@@ -10,7 +10,7 @@ class GrdAction extends Action {
   		'ttl'=>'年级',
   		'jn'=>array(),//NB
       //自己的全部+f的显示的东西
-  		'para'=>array('grdid'=>'grdID','grdnm'=>'年级名称'),//NB
+  		'para'=>array('grdid'=>'grdID','grdnm'=>'年级名称','grddflt'=>'年级默认'),//NB
   		//抛去不是zabojin的属性针对para
       'notself'=>array(),
        ##########modify 添加修改中不需要展示和理会的属性 针对para
@@ -31,7 +31,7 @@ class GrdAction extends Action {
       'spccdt_dflt'=>array(),//NB
       'odr_dflt'=>array(),//NB
       //hide的fld必须有，他们虽然不显示但是必须选择，这样才能在第一次进入query的时候，隐藏属性可以被调用，特别是id和fid
-  		'fld_dflt'=>array('grdid','grdnm'),//NB
+  		'fld_dflt'=>array('grdid','grdnm','grddflt'),//NB
   		'cdt_dflt'=>array(),//NB
   		
   		'lmt_dflt'=>10,//NB
@@ -43,9 +43,9 @@ class GrdAction extends Action {
       #########删除提醒
       'deleteconfirm'=>'确定要删除此条记录？',
       #####转义
-      'transmean'=>array(),//NB
+      'transmean'=>array('grddflt'=>array('0'=>'否','1'=>'是')),//NB
       #####默认值
-      'dfltvalue'=>array(),
+      'dfltvalue'=>array('grddflt'=>0),
       
     	);
 

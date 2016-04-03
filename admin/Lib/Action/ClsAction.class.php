@@ -106,8 +106,8 @@ class ClsAction extends Action {
     //公版
     public function dolinkage(){
       header("Content-Type:text/html; charset=utf-8");
-      $pb=D('PB');
-      $arr=$pb->dolinkage($this->all);
+      $nb=D('NB');
+      $arr=$nb->dolinkage($this->all);
       
       $data=$arr['data'];
       

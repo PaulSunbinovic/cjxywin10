@@ -54,7 +54,7 @@ class SysAction extends Action {
     	header("Content-Type:text/html; charset=utf-8");
     	$pb=D('PB');
     	$pb->query($this->all);
-      $this->display('Cmn:query');
+      $this->display('query');
   
     }
     
@@ -92,5 +92,11 @@ class SysAction extends Action {
   		
    		$this->ajaxReturn($data,'json');
    	}
+
+    public function dosetnewxq(){
+      header("Content-Type:text/html; charset=utf-8");
+      
+      $this->ajaxReturn($data,'json');
+    }
 
 }

@@ -153,7 +153,7 @@ class PBModel extends Action{
     	$this->assign('moforjs',transforjs($mo));
     	$this->assign('ttl',$mo[$lowmdmk.'nm'].$pattern);
 		
-		return createarrok('ok',$data,'',$info);
+		return createarrok('ok',$mo,'',$info);
 	}
 	##########
 	public function doupdate($all){
@@ -264,70 +264,8 @@ class PBModel extends Action{
 		
 		return createarrok('ok',$data,'',$info);
 	}
-	##########
-	public function dolinkage($all){
-		$info=collectinfo(__METHOD__,'$all',array($all));
-		if(isset($all)===false){return createarrerr('error_code','all 不能为空',$info);}//防止NULL
-		$get=$_GET;
-		unset($get['_URL_']);
 
-		$trigger=$get['trigger'];
-
-		$linkage=$all['linkage'];
-		$splitmark=$all['splitmark'];
-		$g=M($splitmark);
-
-		$arr_rslt=array();
-
-		foreach($linkage as $aim=>$factors){//aim  f_pcls_usrid     |     $tmp usr  | linkage   f_cls_sttid => 1
-			if(isset($factors[$trigger])){
-
-				//会引起哪个m需要判断
-				$tmp=explode('_',$aim);
-				$tmp=$tmp[2];$tmp=explode('id',$tmp);
-				$tmp=$tmp[0];
-
-				$arr_tmp=array();
-				$arr_tmp['aim']=$aim;
-				$arr_tmp['prex']=$tmp;
-				//那么判断哪个值需要变化
-				$str_lkg='1=1';
-				foreach($factors as $lkgk=>$lkgv){
-					$tmp_lkgk=explode('_',$lkgk);$tmp_lkgk=$tmp_lkgk[0].'_'.$tmp.'_'.$tmp_lkgk[2];
-					$tmpnm=$tmp.'nm';
-					if($lkgv==2){
-						if($get[$lkgk]){
-							$go=$g->where($splitmark.'id'.'='.$get[$lkgk])->find();
-							$gnm=$go[$splitmark.'nm'];
-							$tmp=$gnm.'_'.$tmp;
-							$str_lkg=$str_lkg.' AND '.$tmp_lkgk.'='.$get[$lkgk];
-						}else{
-							$str_lkg='1=2';break;//一票否决
-						}
-					}else if($lkgv==1){
-						if($get[$lkgk]){
-							$str_lkg=$str_lkg.' AND '.$tmp_lkgk.'='.$get[$lkgk];
-						}else{
-							$str_lkg='1=2';break;//一票否决
-						}
-					}else if($lkgv==0){
-						if($get[$lkgk]){
-							$str_lkg=$str_lkg.' AND '.$tmp_lkgk.'='.$get[$lkgk];
-						}
-					}
-					
-				}
-				
-				$tmp=M($tmp);
-				$mls=$tmp->where($str_lkg)->order($tmpnm.' ASC')->select();
-				$arr_tmp['ls']=$mls;
-				array_push($arr_rslt,$arr_tmp);
-			}
-		}
-
-
-   		return createarrok('ok',$arr_rslt,'',$info);
-	}
+	
 	###
 	public function getmoBBB($gid,$splitmark,$mdmk,$id,$para,$jn_same,$jn){
 		$info=collectinfo(__METHOD__,'$mdmk,$id,$para,$jn',array($mdmk,$id,$para,$jn));
@@ -482,7 +420,7 @@ class PBModel extends Action{
     	$this->assign('moforjs',transforjs($mo));
     	$this->assign('ttl',$mo[$lowmdmk.'nm'].$pattern);
 		
-		return createarrok('ok',$data,'',$info);
+		return createarrok('ok',$mo,'',$info);
 	}
 	##########
 	public function doupdateBBB($all){

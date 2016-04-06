@@ -19,5 +19,17 @@ class GrdModel extends Action{
 		return createarrok('ok',$grdls,'',$info);
 	}
 
+	//公版
+	public function getmo($grdid){
+		$info=collectinfo(__METHOD__,'$grdid',array($grdid));
+		if(isset($grdid)===false){return createarrerr('error_code','grdid 不能为空',$info);}//防止NULL
+		
+		$grd=M('grd');
+		$grdo=$grd->where('grdid='.$grdid)->find();
+
+		
+		return createarrok('ok',$grdo,'',$info);
+	}
+
 } 
 ?>

@@ -10,7 +10,7 @@ class BxxsAction extends Action {
   		'ttl'=>'办学形式',
   		'jn'=>array(),//NB
       //自己的全部+f的显示的东西
-  		'para'=>array('bxxsid'=>'bxxsID','bxxsnm'=>'办学形式名称','bxxszs'=>'是否招生'),//NB
+  		'para'=>array('bxxsid'=>'bxxsID','bxxsnm'=>'办学形式名称','bxxszs'=>'是否招生','bxxsprex'=>'办学形式前缀'),//NB
   		//抛去不是zabojin的属性针对para
       'notself'=>array(),
        ##########modify 添加修改中不需要展示和理会的属性 针对para
@@ -31,7 +31,7 @@ class BxxsAction extends Action {
       'spccdt_dflt'=>array(),//NB
       'odr_dflt'=>array(),//NB
       //hide的fld必须有，他们虽然不显示但是必须选择，这样才能在第一次进入query的时候，隐藏属性可以被调用，特别是id和fid
-  		'fld_dflt'=>array('bxxsid','bxxsnm','bxxszs'),//NB
+  		'fld_dflt'=>array('bxxsid','bxxsnm','bxxszs','bxxsprex'),//NB
   		'cdt_dflt'=>array(),//NB
   		
   		'lmt_dflt'=>10,//NB

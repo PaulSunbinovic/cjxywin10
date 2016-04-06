@@ -28,7 +28,7 @@ $(function(){
 			
 		imgg.attr('src',upload_path+'/'+content);
 		//隐藏系统所需的用户upt
-		$('#pt').val(upload_path+'/'+content);
+		$('#stdpt').val(upload_path+'/'+content);
 		
 	}
 	

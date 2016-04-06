@@ -226,4 +226,18 @@ class TestAction extends Action {
         }
     }
 
+    public function mdfatcctt(){
+        header("Content-Type:text/html; charset=utf-8");
+        $atc=M('atc');
+        $atcls=$atc->select();
+        foreach($atcls as $atcv){
+            $atcctt=$atcv['atcctt'];if(strstr($atcctt,'pblc')){p($atcctt);die;}
+            //替换
+            // str_replace('pblc','etc',$atcctt);
+            // $dt=array('atcctt'=>$atcctt);
+            // $atc->where('atcid='.$atcv['atcid'])->setField($dt);
+        }
+    }
+
+
 }

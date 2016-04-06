@@ -300,5 +300,192 @@ class StdModel extends Action{
 		
 		return createarrok('ok',$mo,'',$info);
 	}
+
+	##########
+	public function doadd($all){
+		$info=collectinfo(__METHOD__,'$all',array($all));
+		if(isset($all)===false){return createarrerr('error_code','all 不能为空',$info);}//防止NULL
+		$pmj=D('Pmj');$stdxqpmj=D('Stdxqpmj');$stdxqpcls=D('Stdxqpcls');$stdxqdm=D('Stdxqdm');$dm=D('Dm');$stdxqdm=D('Stdxqdm');$xf=D('Xf');$zsf=D('Zsf');$xn=D('Xn');$cw=D('Cw');
+
+		$get=$_GET;
+		$mdmk=$all['mdmk'];
+
+		$splitmark=$all['splitmark'];
+   		
+   		$lowmdmk=strtolower($mdmk);
+		$mid=$lowmdmk.'id';
+		
+		$id=$get[$mid];
+		$gid=$get['f_'.$lowmdmk.'_'.$splitmark.'id'];
+
+		$g=M($splitmark);
+		$go=$g->where($splitmark.'id='.$gid)->find();
+		$gnm=$go[$splitmark.'nm'];
+		$m=M($gnm.'_'.$lowmdmk);
+
+		//提取专业信息
+		$pmjid=$get['f_stdxqpmj_pmjid'];
+		unset($get['f_stdxqpmj_pmjid']);
+		$xqid=$get['f_stdxqpmj_xqid'];
+		unset($get['f_stdxqpmj_xqid']);
+		$arr_pmjo=$pmj->getmo($gid,$pmjid);$pmjo=$arr_pmjo['data'];
+		
+		$arr_stdaplno=$this->createstdaplno($gid,$pmjo['bxxsprex']);$stdaplno=$arr_stdaplno['data'];
+
+		
+
+		//修改信息
+		$get['stdidcd']=strtoupper($get['stdidcd']);
+		$get['stdno']='';
+		$get['stdaplno']=$stdaplno;
+		$get['f_std_statid']=5;
+		$get['stdpw']=md5('11111111');
+		$get['stdpertm']='';
+		$get['stdertm']='';
+		$get['stdicbc']='';
+		$get['stdpnttm']='';
+		$get['stdaddtm']=date('Y-m-d h:m:s',time());
+		$get['stdmdftm']=date('Y-m-d h:m:s',time());
+	
+	
+	////1根据判断是否有其他人注册过2判断stdidcd是否和生日吻合
+
+		unset($get[$mid]);
+		unset($get['_URL_']);
+
+		$arr_stdo=$this->getmobystdidcd($gid,$get['stdidcd']);$stdo=$arr_stdo['data'];
+
+		if($stdo){
+			$pattern=3;//已经有了不能重复注册
+		}else if(substr($get['stdidcd'], 6,8)!=str_replace('-','',$get['stdbtd'])){
+			$pattern=4;//身份证和生日不符合
+		}else if($id==0){
+			$m->data($get)->add();
+			$pattern=0;
+
+			//添加成功后添加 专业数据 班级数据（占坑）  住宿数据  财务
+			//1获取学生注册完的学生信息
+			$arr_stdo=$this->getmobystdidcd($gid,$get['stdidcd']);$stdo=$arr_stdo['data'];
+			$stdid=$stdo['stdid'];
+			//赐予session
+			session('stdidss',$stdid);
+			//
+			$stdxqpmj->add($gid,$stdid,$xqid,$pmjid);
+			$stdxqpcls->add($gid,$stdid,$xqid,0);
+			$arr_dmo=$dm->getmobybxxspredandsexid($pmjo['bxxsprex'],$get['f_std_sexid']);$dmo=$arr_dmo['data'];
+			$stdxqdm->add($gid,$stdid,$xqid,$dmo['dmid']);
+			$arr_xfo=$xf->getmo($gid,$get['f_std_sttid'],$pmjo['f_pmj_bxxsid'],$pmjo['f_pmj_ccid'],$pmjo['f_pmj_klid']);$xfo=$arr_xfo['data'];
+			$arr_zsfo=$zsf->getmo($gid,$dmo['dmid']);$zsfo=$arr_zsfo['data'];
+			$arr_xno=$xn->getmobygrdid($gid);$xno=$arr_xno['data'];
+			$cw->add($gid,$xno['xnid'],$xqid,$stdid,$xfo['xfsm'],$xfo['jckwfsm'],$zsfo['zsfsm']);
+		}else{
+			$m->where($mid.'='.$id)->setField($get);
+			$pattern=1;
+		}
+   		
+		
+		return createarrok('ok',$pattern,'',$info);
+	}
+
+	//############test
+	public function createstdaplno($grdid,$bxxsprex){
+		$info=collectinfo(__METHOD__,'$grdid,$bxxsprex',array($grdid,$bxxsprex));
+		$grd=D('Grd');
+
+		$arr_grdo=$grd->getmo($grdid);$grdo=$arr_grdo['data'];
+		$std=M($grdo['grdnm'].'_std');
+		$prex=$bxxsprex.$grdo['grdnm'];
+
+		$stdo=$std->where("stdaplno LIKE '%".$prex."%'")->order('stdaplno DESC')->find();
+		if($stdo){$stdaplnomax=$stdo['stdaplno'];}else{$stdaplnomax=$prex.'0000';}
+		$last4=substr($stdaplnomax,-4);
+		$last4=(int)$last4+1;
+
+		$length=strlen((string)$last4);
+
+		$bu_length=4-$length;//补length
+
+		$stdaplno='';
+		for($i=0;$i<$bu_length;$i++){
+			$stdaplno=$stdaplno.'0';
+		}
+		$stdaplno=$bxxsprex.$grdo['grdnm'].$stdaplno.$last4;
+
+
+		return createarrok('ok',$stdaplno,'',$info);
+	}
+
+	//############test
+	public function getmobystdidcd($grdid,$stdidcd){
+		$info=collectinfo(__METHOD__,'$gid,$stdidcd',array($grdid,$stdidcd));
+		if(isset($grdid)===false){return createarrerr('error_code','grdid 不能为空',$info);}//防止NULL
+		if(isset($stdidcd)===false){return createarrerr('error_code','stdidcd 不能为空',$info);}//防止NULL
+		$grd=D('Grd');
+		$arr_grdo=$grd->getmo($grdid);$grdo=$arr_grdo['data'];
+		$std=M($grdo['grdnm'].'_std');
+
+		$stdo=$std->where("stdidcd='".$stdidcd."'")->find();
+
+		return createarrok('ok',$stdo,'',$info);
+	}
+
+	#########
+	public function viewBBB($all){
+		$info=collectinfo(__METHOD__,'$all',array($all));
+		if(isset($all)===false){return createarrerr('error_code','all 不能为空',$info);}//防止NULL
+		
+		
+    	
+    	$mdmk=$all['mdmk'];
+    	$lowmdmk=strtolower($mdmk);$this->assign('lowmdmk',$lowmdmk);
+
+    	
+    	
+    	$gid=$_GET['gid'];$id=session('stdidss');
+    	$para=$all['para'];$this->assign('para',$para);
+    	$jn_same=$all['jn_same'];
+    	$jn=$all['jn'];
+    	$no_view=$all['no_view'];$this->assign('no_view',$no_view);
+    	$splitmark=$all['splitmark'];
+
+
+    	$arr_mo=$this->getmoBBB($gid,$splitmark,$mdmk,$id,$para,$jn_same,$jn);$mo=$arr_mo['data'];
+
+    	$transmean=$all['transmean'];
+    	foreach($mo as $k=>$v){
+    		if(isset($transmean[$k])){
+    			$mo[$k]=$transmean[$k][$mo[$k]];
+    		}
+    	}
+    	
+    	$this->assign('mo',$mo);
+    	$this->assign('ttl',$mo[$lowmdmk.'nm']);
+		
+		return createarrok('ok',$data,'',$info);
+	}
+
+	###
+	public function getmoBBB($gid,$splitmark,$mdmk,$id,$para,$jn_same,$jn){
+		$info=collectinfo(__METHOD__,'$mdmk,$id,$para,$jn',array($mdmk,$id,$para,$jn));
+		if(isset($mdmk)===false){return createarrerr('error_code','mdmk 不能为空',$info);}//防止NULL
+		if(isset($id)===false){return createarrerr('error_code','id 不能为空',$info);}//防止NULL
+		if(isset($para)===false){return createarrerr('error_code','para 不能为空',$info);}//防止NULL
+		if(isset($jn)===false){return createarrerr('error_code','jn 不能为空',$info);}//防止NULL
+		
+		$lowmdmk=strtolower($mdmk);
+		$g=M($splitmark);
+		$go=$g->where($splitmark.'id='.$gid)->find();
+		$gnm=$go[$splitmark.'nm'];
+
+		$m=M($gnm.'_'.$lowmdmk);
+		foreach($jn_same as $jnsmv){
+			$m->join('tb_'.$gnm.'_'.$jnsmv);
+		}
+
+		foreach($jn as $jnv){$m->join($jnv);}
+		$mo=$m->where($lowmdmk.'id='.$id)->find();
+		 
+		return createarrok('ok',$mo,'',$info);
+	}
 } 
 ?>

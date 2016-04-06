@@ -257,6 +257,8 @@ class NBModel extends Action{
 					$lmt_right=$over-$nwstart;
 				}
 				$mls=$m->limit($lmt_left.','.($lmt_right-$lmt_left+1))->select();
+				//考虑到array_merge的特性
+				if(!$mls){$mls=array();}
 				$arr_rslt=array_merge($arr_rslt, $mls);
 			}
 			

@@ -112,7 +112,7 @@ class StdAction extends Action {
    	}
 
    	//公版
-   	public function doupdate(){
+   	public function doupdate(){p(111);die;
    		header("Content-Type:text/html; charset=utf-8");
    		$pb=D('PB');
    		$arr_pattern=$pb->doupdateBBB($this->all);

@@ -1,5 +1,5 @@
 <script>
-	var doupdate='__URL__/doupdate';
+	var doadd='__URL__/doadd';
 	var dolinkage='__URL__/dolinkage';
 	var obj=new Object();
 	var addormdf="{$id}";
@@ -19,7 +19,7 @@
 	</style>
 			
 	<div class='mingxi'>
-	专业信息：<input type="hidden" id='f_std_sttid' value="1">
+	专业信息：<input type="hidden" id='f_std_sttid' value="1"><input type='hidden' id='f_stdxqpmj_xqid' value="{$mo['f_stdxqpmj_xqid']}">
 	<table>
 	<tr>
 	<td>
@@ -172,20 +172,44 @@
 	</tr>
 	<tr>
 	
-	<td>推荐人姓名：</td><td colspan=2><input type='text' id='stdrcmdnm'/></td>
-	<td>推荐人手机号：</td><td colspan=3><input type='text' id='stdrcmdcp'/></td>
+	<td>推荐人姓名：</td><td colspan=2><input type='text' id='stdrcmdnm' placeholder='若无推荐人则不用填写'/></td>
+	<td>推荐人手机号：</td><td colspan=3><input type='text' id='stdrcmdcp' placeholder='若无推荐人则不用填写'/></td>
 	<td colspan="2"></td>
 	</tr>
 	<input type="hidden" id='f_std_statid' value='0' >
-	
-	
+	<input type="hidden" id='stdpw' value='0' >
+	<input type="hidden" id='stdpertm' value='' >
+	<input type="hidden" id='stdertm' value='0' >
+	<input type="hidden" id='stdicbc' value='0' >
+	<input type="hidden" id='stdpnttm' value='0' >
+	<input type="hidden" id='stdaddtm' value='0' >
+	<input type="hidden" id='stdmdftm' value='0' >
 	</table>
 	<p style='color:#f00'>注：*号标记的必须填写</p>
 	</div>
 	
-	<a class='btn btn-success btn-lg' id='update'>提交报名</a>
+	<a class='btn btn-success btn-lg' id='panduan'>提交报名</a>
 
+<div id='myModal' style="display: none;" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+	  <div class="modal-content">
 
+	    <div class="modal-header">
+	    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	      
+	      <h4 class="modal-title" id="mySmallModalLabel">提示</h4>
+	    </div>
+	    <div class="modal-body">
+	      	<p id='rslt'>aaa</p>
+	    </div>
+	    <div class="modal-footer">
+	    <button type="button" class="btn btn-success" id='gttj' style='display:none'>没有问题，提交信息</button>
+	    <button type="button" class="btn btn-danger" id='sureII' style='display:none'>再检查下，暂不提交</button>
+	        <button type="button" class="btn btn-default" data-dismiss="modal" id='sure'>关闭</button>
+	    </div>
+	  </div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div>
 <script>
 //自身参数，初始数据
 var para=new Object();
@@ -234,8 +258,8 @@ transmeank.push("{$tmvk}");
 
 //#########
 $(function(){
-	$('#update').click(function(){
-
+	$('#panduan').click(function(){
+		var rslt=$('#rslt');
 		//首先把相关的参数数据聚集起来，把自身更新需要的参数以及变动的数据进行传输
 		//由于第一个往往是id所以，就不去考虑了
 		//先判断是否为空
@@ -244,13 +268,76 @@ $(function(){
 			//如果是允许空的，就不用考虑他有没有空的事情了；反之不在这里头，就要考虑了
 			if(no_update.indexOf(key)==-1&&allowempty.indexOf(key)==-1){var tagname=tmp.get(0).tagName;
 				if(tagname=='INPUT'&&$.trim(tmp.val())==''){
-					alert(para[key]+'不能为空');tmp.focus();return;
+					rslt.html(para[key]+'不能为空');$('#myModal').modal({});return;
 				}else if(transmeank.indexOf(key)==-1&&tagname=='SELECT'&&$.trim(tmp.val())=='0'){
-					alert(para[key]+'未选择');tmp.focus();return;
+					rslt.html(para[key]+'未选择');$('#myModal').modal({});return;
 				}
 			}
 			
 		}
+		//特殊的判断
+		var pttnmbl=/^1[34578][0-9]{9}$/;
+		if(!pttnmbl.test($.trim($('#stdcp').val()))){
+			rslt.html('手机号码格式不正确！');
+			$('#myModal').modal({
+    	    	  //keyboard: false
+    	    })
+			return false;
+		}
+		if($.trim($('#stdidcd').val()).length!=18){
+			rslt.html('身份证号码必须18位！');
+			$('#myModal').modal({
+    	    	  //keyboard: false
+    	    })
+			return false;
+		}
+		//var pttnmbl=/^1[34578][0-9]{9}$/;
+		if(!pttnmbl.test($.trim($('#stdrltacp').val()))){
+			rslt.html('家长一手机号码格式不正确！');
+			$('#myModal').modal({
+    	    	  //keyboard: false
+    	    })
+			return false;
+		}
+
+		if($.trim($('#stdml').val())!=''){
+			var pttneml=/^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
+			if(!pttneml.test($.trim($('#stdml').val()))){
+				rslt.html('邮箱格式不正确！');
+				$('#myModal').modal({
+	    	    	  //keyboard: false
+	    	    })
+				return false;
+			}
+		}
+
+		
+		if($('#f_stdxqpmj_pmjid').val()==0){
+			rslt.html('请选择专业！');
+			$('#myModal').modal({
+    	    	  //keyboard: false
+    	    })
+			return false;
+		}
+		// if($.trim($('#stdpst').val())!=''&&(!(!isNaN($.trim($('#stdpst').val()))&&$.trim($('#stdpst').val()).length==6))){//非空情况下 是数字且6位之外的情况都是耍流氓
+		// 	rslt.html('邮编格式不正确！');
+		// 	$('#myModal').modal({
+  //   	    	  //keyboard: false
+  //   	    })
+		// 	return false;
+		// }
+
+		$('#gttj').show();
+		$('#sureII').show();
+		$('#sure').hide();
+		rslt.html('本系统不支持修改信息，请确定是否信息无误？（如果提交后发现有信息需要修改，请联系0571-86835789）');
+		$('#myModal').modal({
+	    	  //keyboard: false
+	    })
+		
+	})
+
+	$('#gttj').click(function(){
 		//然后判断哪些是有变动的，变动的数值需要提交修改，没有变动的则直接不用接后台了
 		//其中添加需要全盘给上，修改只用给变量就行
 		if(addormdf!=0){
@@ -273,21 +360,27 @@ $(function(){
 					obj[key]=valuenow;
 				}
 			}
+			//添加学籍信息（因为学籍信息不被上传）
+			obj['f_stdxqpmj_pmjid']=$('#f_stdxqpmj_pmjid').val();
+			obj['f_stdxqpmj_xqid']=$('#f_stdxqpmj_xqid').val();
+			
 		}
 		
-
+		$('#sure').trigger('click');
 		$.ajax({
             'type': 'GET',
-            'url':doupdate,
+            'url':doadd,
             'async':false,  
             'contentType': 'application/json',
             'data': obj,
             'dataType': 'json',
             'success': function(data) {
+            	var pattern=data['pattern'];
             	var str='';
-            	if(data['pattern']=='0'){str='添加';}else{str='修改';}
-            	alert(str+'成功！点击返回');
-            	window.location.href=document.referrer;
+            	if(pattern=='0'){alert('报名成功！');window.location.href=__url__+'/view';}
+            	if(pattern=='3'){alert('该身份证已经报过名了！');}
+            	if(pattern=='4'){alert('身份证号码与出生日期不相符！');}
+            	
                 console.log("success");
             },
             'error':function() {
